@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Fizzle — Sweetened by bees. (design mockup)</title>
+<meta name="description" content="Website design mockup for Fizzle, a fruit soda sweetened with real honey. A school brand project, not a real shop.">
+<link rel="icon" href="img/icon.svg">
+<style>
+@font-face { font-family: Poppins; font-weight: 400; src: url(fonts/poppins-latin-400-normal.woff2) format('woff2'); }
+@font-face { font-family: Poppins; font-weight: 500; src: url(fonts/poppins-latin-500-normal.woff2) format('woff2'); }
+@font-face { font-family: Poppins; font-weight: 600; src: url(fonts/poppins-latin-600-normal.woff2) format('woff2'); }
+@font-face { font-family: Poppins; font-weight: 700; src: url(fonts/poppins-latin-700-normal.woff2) format('woff2'); }
+@font-face { font-family: Poppins; font-weight: 800; src: url(fonts/poppins-latin-800-normal.woff2) format('woff2'); }
+:root {
+  --orange: #FF8A1F; --orange-d: #F07812; --navy: #1B1F44; --teal: #17A2AD; --pink: #F2466F; --honey: #FFC233; --green: #3FBF5F;
+  --cream: #FFF4DC; --paper: #FFFBF2; --line: 2px solid var(--navy); --shadow: 5px 5px 0 var(--navy);
+  --wrap: 1200px; --gap: 24px; --r: 18px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: Poppins, system-ui, sans-serif; color: var(--navy); background: var(--cream); font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+body::before { content: ''; position: fixed; inset: 0; z-index: -1; background: radial-gradient(circle, #F2DDB2 1.6px, transparent 1.8px) 0 0 / 28px 28px; opacity: .55; }
+img { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; cursor: pointer; }
+a { color: inherit; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 32px; }
+.eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+h1, h2, h3 { margin: 0; line-height: 1.05; letter-spacing: -.02em; }
+h2 { font-size: 44px; font-weight: 800; }
+.card { background: #fff; border: var(--line); border-radius: var(--r); box-shadow: var(--shadow); }
+
+/* the notice that this is a mockup */
+.mock { background: var(--navy); color: var(--cream); font-size: 13px; text-align: center; padding: 8px 16px; }
+.mock b { color: var(--honey); font-weight: 700; }
+
+/* header */
+header { position: sticky; top: 0; z-index: 20; background: var(--orange); border-bottom: var(--line); }
+.bar { display: flex; align-items: center; gap: 28px; height: 78px; }
+.bar .logo img { height: 60px; width: auto; }
+nav { display: flex; gap: 26px; margin-left: auto; font-weight: 600; font-size: 15px; }
+nav a { text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent; }
+nav a:hover { border-color: var(--navy); }
+.lang { display: flex; border: var(--line); border-radius: 999px; overflow: hidden; background: #fff; }
+.lang button { border: 0; background: none; padding: 6px 12px; font-size: 13px; font-weight: 700; }
+.lang button[aria-pressed="true"] { background: var(--navy); color: var(--cream); }
+.cartbtn { position: relative; display: grid; place-items: center; width: 46px; height: 46px; border: var(--line); border-radius: 14px; background: #fff; box-shadow: 3px 3px 0 var(--navy); transition: transform .15s, box-shadow .15s; }
+.cartbtn:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--navy); }
+.cartbtn svg { width: 24px; height: 24px; }
+.count { position: absolute; top: -9px; right: -9px; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 11px; background: var(--pink); color: #fff; font-size: 12px; font-weight: 700; display: grid; place-items: center; border: 2px solid var(--navy); }
+.count:empty, .count[data-n="0"] { display: none; }
+.count.bump { animation: bump .4s cubic-bezier(.25, 1, .5, 1); }
+@keyframes bump { 0% { transform: scale(1); } 35% { transform: scale(1.25); } 100% { transform: scale(1); } }
+.menubtn { display: none; }
+
+/* hero */
+.hero { padding: 64px 0 72px; }
+.hero .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.hero h1 { font-size: 76px; font-weight: 800; margin: 14px 0 18px; }
+.hero h1 .hl { color: var(--orange-d); }
+.hero p.lead { font-size: 19px; max-width: 30em; margin: 0 0 26px; }
+.price { display: flex; align-items: baseline; gap: 10px; margin-bottom: 22px; }
+.price strong { font-size: 34px; font-weight: 800; }
+.price span { font-weight: 500; opacity: .75; }
+.field { margin-bottom: 18px; }
+.field > .lbl { display: block; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 8px; }
+.packs { display: flex; gap: 10px; flex-wrap: wrap; }
+.pack { border: var(--line); border-radius: 14px; background: #fff; padding: 10px 16px; text-align: left; line-height: 1.25; min-width: 130px; transition: background .15s, transform .15s; }
+.pack small { display: block; font-weight: 500; opacity: .75; }
+.pack span { font-weight: 700; }
+.pack[aria-pressed="true"] { background: var(--honey); box-shadow: 3px 3px 0 var(--navy); transform: translate(-1px, -1px); }
+.buyrow { display: flex; gap: 14px; align-items: stretch; flex-wrap: wrap; }
+.qty { display: flex; align-items: center; border: var(--line); border-radius: 14px; background: #fff; overflow: hidden; }
+.qty button { width: 44px; height: 52px; border: 0; background: none; font-size: 22px; font-weight: 600; }
+.qty button:hover { background: var(--cream); }
+.qty output { min-width: 34px; text-align: center; font-weight: 700; font-size: 18px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 56px; padding: 0 26px; border: var(--line); border-radius: 14px; font-weight: 700; font-size: 17px; box-shadow: 4px 4px 0 var(--navy); transition: transform .15s, box-shadow .15s, background .2s; text-decoration: none; }
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--navy); }
+.btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--navy); }
+.btn.primary { background: var(--orange); }
+.btn.dark { background: var(--navy); color: var(--cream); box-shadow: 4px 4px 0 var(--orange-d); }
+.btn.added { background: var(--green); }
+.btn svg { width: 20px; height: 20px; }
+.ticks { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 26px; font-weight: 600; font-size: 15px; }
+.ticks span { display: flex; align-items: center; gap: 8px; }
+.ticks i { width: 22px; height: 22px; border-radius: 50%; background: var(--teal); border: 2px solid var(--navy); display: grid; place-items: center; }
+.ticks i::after { content: ''; width: 8px; height: 4px; border: solid #fff; border-width: 0 0 2.5px 2.5px; transform: rotate(-45deg) translate(1px, -1px); }
+.shot { position: relative; }
+.shot .card { overflow: hidden; aspect-ratio: 792 / 1000; }
+.shot .card img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 46%; }
+.shot .beeimg { position: absolute; width: 92px; left: -38px; top: 38px; animation: fly 6s ease-in-out infinite; }
+@keyframes fly { 0%, 100% { transform: translate(0, 0) rotate(0); } 50% { transform: translate(10px, -14px) rotate(4deg); } }
+.tag { position: absolute; right: -18px; bottom: 42px; background: var(--pink); color: #fff; border: var(--line); border-radius: 14px; padding: 10px 16px; font-weight: 700; box-shadow: var(--shadow); transform: rotate(3deg); }
+
+/* sections */
+section.block { padding: 72px 0; }
+.head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 32px; }
+.head p { margin: 0; max-width: 26em; }
+.gallery { display: grid; grid-template-columns: 1.4fr 1fr 1fr; grid-template-rows: auto auto; gap: var(--gap); }
+.gallery figure { margin: 0; overflow: hidden; position: relative; }
+.gallery figure img { width: 100%; height: 100%; object-fit: cover; }
+.gallery figure:first-child { grid-row: span 2; }
+.gallery figcaption { position: absolute; left: 14px; bottom: 14px; background: var(--cream); border: var(--line); border-radius: 999px; padding: 4px 12px; font-size: 13px; font-weight: 700; }
+.gallery .g2, .gallery .g3 { aspect-ratio: 4 / 3.2; }
+.gallery .g4 { grid-column: span 2; aspect-ratio: 16 / 7; }
+.gallery .g4 img { object-position: 50% 40%; }
+
+.inside { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.feats { display: grid; gap: 18px; }
+.feat { display: grid; grid-template-columns: 64px 1fr; gap: 16px; align-items: center; padding: 18px 20px; }
+.feat .ic { width: 64px; height: 64px; border-radius: 16px; border: var(--line); display: grid; place-items: center; }
+.feat h3 { font-size: 19px; font-weight: 700; margin-bottom: 2px; }
+.feat p { margin: 0; font-size: 15px; }
+.ingr { padding: 22px 24px; margin-top: 18px; font-size: 15px; }
+.ingr b { display: block; margin-bottom: 4px; }
+.nutri { padding: 26px 28px; }
+.nutri h3 { font-size: 22px; font-weight: 800; padding-bottom: 12px; border-bottom: 8px solid var(--navy); margin-bottom: 4px; }
+.nutri table { width: 100%; border-collapse: collapse; font-size: 16px; }
+.nutri td { padding: 11px 0; border-bottom: 1.5px solid #D9D2C3; }
+.nutri td:last-child { text-align: right; font-weight: 700; }
+.nutri tr.big td { font-weight: 800; font-size: 18px; }
+.nutri tr.sub td:first-child { padding-left: 18px; }
+.nutri .note { font-size: 13px; opacity: .7; margin: 12px 0 0; }
+
+.reviews { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--gap); }
+.review { padding: 24px; display: flex; flex-direction: column; gap: 14px; }
+.stars { color: var(--orange-d); letter-spacing: 2px; font-size: 18px; }
+.review p { margin: 0; font-size: 16px; }
+.review footer { margin-top: auto; display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 15px; }
+.avatar { width: 38px; height: 38px; border-radius: 50%; border: var(--line); display: grid; place-items: center; font-weight: 800; }
+.score { display: flex; align-items: center; gap: 12px; }
+.score strong { font-size: 40px; font-weight: 800; }
+.pill { display: inline-block; border: var(--line); border-radius: 999px; padding: 3px 12px; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; background: #fff; }
+
+.faqgrid { display: grid; grid-template-columns: 1fr 340px; gap: 32px; align-items: start; }
+.faq { display: grid; gap: 14px; }
+.ask { padding: 28px; background: var(--honey); text-align: left; }
+.ask img { width: 96px; margin-bottom: 10px; }
+.ask h3 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+.ask p { margin: 0 0 20px; }
+.faq details { padding: 0; }
+.faq summary { list-style: none; cursor: pointer; padding: 20px 24px; font-weight: 700; font-size: 18px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: '+'; font-size: 26px; line-height: 1; transition: transform .25s; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { margin: 0; padding: 0 24px 22px; }
+
+.contact { display: grid; grid-template-columns: 1.1fr 1fr; gap: 32px; align-items: start; }
+.contact .intro p { font-size: 18px; max-width: 26em; }
+.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cc { padding: 18px 20px; }
+.cc .eyebrow { font-size: 11px; opacity: .7; }
+.cc strong { display: block; font-size: 17px; font-weight: 700; white-space: nowrap; }
+.cc.wide { grid-column: span 2; }
+.cc a { text-decoration: none; }
+.cc a:hover { text-decoration: underline; }
+
+footer.site { background: var(--navy); color: var(--cream); margin-top: 40px; padding: 56px 0 30px; border-top: var(--line); }
+.foot { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 32px; }
+.foot .brand { background: var(--orange); border-radius: var(--r); padding: 22px 24px; border: 2px solid var(--cream); max-width: 380px; }
+.foot .brand img { height: 84px; width: auto; }
+.foot h4 { margin: 0 0 12px; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--honey); }
+.foot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.foot a { text-decoration: none; opacity: .9; }
+.foot a:hover { opacity: 1; text-decoration: underline; }
+.legal { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255, 244, 220, .2); font-size: 13px; opacity: .8; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+/* cart drawer */
+.scrim { position: fixed; inset: 0; background: rgba(27, 31, 68, .45); opacity: 0; pointer-events: none; transition: opacity .3s; z-index: 40; }
+.drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(440px, 100%); background: var(--paper); border-left: var(--line); z-index: 41; display: flex; flex-direction: column; transform: translateX(100%); transition: transform .38s cubic-bezier(.2, .8, .2, 1); }
+body.cart-open .scrim { opacity: 1; pointer-events: auto; }
+body.cart-open .drawer { transform: none; }
+.drawer header { position: static; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; height: 78px; }
+.drawer header h3 { font-size: 22px; font-weight: 800; }
+.x { width: 40px; height: 40px; border: var(--line); border-radius: 12px; background: #fff; font-size: 20px; font-weight: 700; }
+.items { flex: 1; overflow: auto; padding: 20px 24px; display: grid; gap: 14px; align-content: start; }
+.empty { opacity: .7; }
+.item { display: grid; grid-template-columns: 76px 1fr; gap: 14px; padding: 12px; }
+.item img { width: 76px; height: 92px; object-fit: cover; border-radius: 10px; border: var(--line); }
+.item h4 { margin: 0; font-size: 15px; font-weight: 700; line-height: 1.3; }
+.item .meta { font-size: 14px; opacity: .75; }
+.item .row { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+.item .qty button { width: 34px; height: 36px; font-size: 18px; }
+.item .qty output { min-width: 26px; font-size: 15px; }
+.rm { border: 0; background: none; font-size: 13px; font-weight: 600; text-decoration: underline; opacity: .75; }
+.sum { border-top: var(--line); padding: 20px 24px 24px; display: grid; gap: 14px; }
+.sum .line { display: flex; justify-content: space-between; font-size: 18px; font-weight: 700; }
+.sum .btn { width: 100%; }
+.sum .notice { display: none; font-size: 14px; background: var(--honey); border: var(--line); border-radius: 12px; padding: 10px 14px; font-weight: 600; }
+.sum .notice.show { display: block; }
+
+/* the sticky buy bar on phones */
+.stick { display: none; }
+
+@media (max-width: 860px) {
+  .wrap { padding: 0 18px; }
+  nav, .bar .lang { display: none; }
+  .bar { height: 64px; gap: 12px; }
+  .bar .logo img { height: 40px; }
+  .menubtn { display: grid; place-items: center; width: 42px; height: 42px; border: var(--line); border-radius: 12px; background: #fff; margin-left: auto; }
+  .menubtn svg { width: 22px; }
+  .cartbtn { width: 42px; height: 42px; }
+  .mobilelang { display: flex !important; margin: 0 0 20px; width: max-content; }
+  .hero { padding: 28px 0 40px; }
+  .hero .grid { grid-template-columns: 1fr; gap: 28px; }
+  .hero .shot { order: -1; }
+  .shot .beeimg { width: 64px; left: -10px; top: 18px; }
+  .tag { right: 10px; bottom: 18px; font-size: 14px; }
+  .hero h1 { font-size: 46px; }
+  .hero p.lead { font-size: 17px; }
+  h2 { font-size: 32px; }
+  .head { flex-direction: column; align-items: start; }
+  section.block { padding: 44px 0; }
+  .gallery { grid-template-columns: 1fr 1fr; }
+  .gallery figure:first-child { grid-column: span 2; grid-row: auto; aspect-ratio: 4 / 4.4; }
+  .gallery .g4 { grid-column: span 2; }
+  .inside, .contact, .foot, .faqgrid { grid-template-columns: 1fr; }
+  .cc.wide { grid-column: auto; }
+  .reviews { grid-template-columns: 1fr; }
+  .cards { grid-template-columns: 1fr; }
+  .stick { display: flex; position: sticky; bottom: 0; z-index: 15; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 18px; background: var(--paper); border-top: var(--line); }
+  .stick strong { font-size: 18px; }
+  .stick .btn { height: 48px; padding: 0 20px; font-size: 16px; }
+}
+.mobilelang { display: none !important; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<div class="mock" data-i18n-html="mock"></div>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#top" aria-label="Fizzle"><img src="img/logo.svg" alt="Fizzle"></a>
+    <nav>
+      <a href="#shop" data-i18n="nav_shop"></a>
+      <a href="#inside" data-i18n="nav_inside"></a>
+      <a href="#reviews" data-i18n="nav_reviews"></a>
+      <a href="#faq" data-i18n="nav_faq"></a>
+      <a href="#contact" data-i18n="nav_contact"></a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button data-lang="en" aria-pressed="true">EN</button><button data-lang="id" aria-pressed="false">ID</button>
+    </div>
+    <button class="menubtn" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <button class="cartbtn" data-open-cart data-i18n-label="cart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2.2l2.3 11.2a1.6 1.6 0 0 0 1.6 1.3h8.6a1.6 1.6 0 0 0 1.6-1.2L21 8H6.2"/><circle cx="9.5" cy="20" r="1.3"/><circle cx="17.5" cy="20" r="1.3"/></svg>
+      <span class="count" id="count">0</span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <!-- hero: the product, its price, pack size, quantity, add to cart / buy now -->
+  <section class="hero" id="shop">
+    <div class="wrap grid">
+      <div>
+        <div class="lang mobilelang" role="group" aria-label="Language">
+          <button data-lang="en" aria-pressed="true">EN</button><button data-lang="id" aria-pressed="false">ID</button>
+        </div>
+        <span class="eyebrow" data-i18n="eyebrow"></span>
+        <h1 data-i18n-html="h1"></h1>
+        <p class="lead" data-i18n="lead"></p>
+        <div class="price"><strong id="price"></strong><span id="per"></span></div>
+        <div class="field">
+          <span class="lbl" data-i18n="pack"></span>
+          <div class="packs" id="packs"></div>
+        </div>
+        <div class="field">
+          <span class="lbl" data-i18n="qty"></span>
+          <div class="buyrow">
+            <div class="qty"><button data-q="-1" aria-label="−">−</button><output id="q">1</output><button data-q="1" aria-label="+">+</button></div>
+            <button class="btn primary" id="add"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2.2l2.3 11.2a1.6 1.6 0 0 0 1.6 1.3h8.6a1.6 1.6 0 0 0 1.6-1.2L21 8H6.2"/></svg><span data-i18n="add"></span></button>
+            <button class="btn dark" id="buy" data-i18n="buy"></button>
+          </div>
+        </div>
+        <div class="ticks"><span><i></i><b data-i18n="t1"></b></span><span><i></i><b data-i18n="t2"></b></span><span><i></i><b data-i18n="t3"></b></span></div>
+      </div>
+      <div class="shot">
+        <div class="card"><img src="img/front.jpg" alt="Fizzle bottle" data-i18n-alt="alt_front"></div>
+        <img class="beeimg" src="img/bee.svg" alt="">
+        <div class="tag" data-i18n="tag"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="gallery">
+    <div class="wrap">
+      <div class="head"><h2 data-i18n="g_title"></h2><p data-i18n="g_sub"></p></div>
+      <div class="gallery">
+        <figure class="card"><img src="img/angle.jpg" alt="" data-i18n-alt="g1"><figcaption data-i18n="g1"></figcaption></figure>
+        <figure class="card g2"><img src="img/front.jpg" alt="" data-i18n-alt="g2"><figcaption data-i18n="g2"></figcaption></figure>
+        <figure class="card g3"><img src="img/can.jpg" alt="" data-i18n-alt="g3"><figcaption data-i18n="g3"></figcaption></figure>
+        <figure class="card g4"><img src="img/close.jpg" alt="" data-i18n-alt="g4"><figcaption data-i18n="g4"></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="inside">
+    <div class="wrap">
+      <div class="head"><h2 data-i18n="i_title"></h2><p data-i18n="i_sub"></p></div>
+      <div class="inside">
+        <div>
+          <div class="feats">
+            <div class="card feat"><div class="ic" style="background:var(--honey)"><img src="img/bee.svg" alt="" style="width:46px"></div><div><h3 data-i18n="f1h"></h3><p data-i18n="f1p"></p></div></div>
+            <div class="card feat"><div class="ic" style="background:var(--green)"><svg width="34" viewBox="-14 -60 128 120"><path d="M0,0C16,-44 66,-50 98,-4C68,34 20,36 0,0Z" fill="#fff" stroke="#1B1F44" stroke-width="9" stroke-linejoin="round"/></svg></div><div><h3 data-i18n="f2h"></h3><p data-i18n="f2p"></p></div></div>
+            <div class="card feat"><div class="ic" style="background:var(--teal)"><svg width="36" viewBox="0 0 40 40"><circle cx="13" cy="27" r="8" fill="#fff" stroke="#1B1F44" stroke-width="3"/><circle cx="27" cy="15" r="5.5" fill="#fff" stroke="#1B1F44" stroke-width="3"/><circle cx="31" cy="31" r="3.5" fill="#fff" stroke="#1B1F44" stroke-width="2.5"/></svg></div><div><h3 data-i18n="f3h"></h3><p data-i18n="f3p"></p></div></div>
+          </div>
+          <div class="card ingr"><b data-i18n="ingr_h"></b><span data-i18n="ingr"></span></div>
+        </div>
+        <div class="card nutri">
+          <h3 data-i18n="n_title"></h3>
+          <table>
+            <tr class="big"><td data-i18n="n_energy"></td><td>120 kcal</td></tr>
+            <tr><td data-i18n="n_fat"></td><td>0 g</td></tr>
+            <tr><td data-i18n="n_protein"></td><td>0 g</td></tr>
+            <tr><td data-i18n="n_carb"></td><td>30 g</td></tr>
+            <tr class="sub"><td data-i18n="n_sugar"></td><td>28 g</td></tr>
+            <tr><td data-i18n="n_sodium"></td><td>15 mg</td></tr>
+          </table>
+          <p class="note" data-i18n="n_note"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="reviews">
+    <div class="wrap">
+      <div class="head">
+        <div><span class="pill" data-i18n="r_pill"></span><h2 style="margin-top:12px" data-i18n="r_title"></h2></div>
+        <div class="score"><strong data-i18n="r_score"></strong><div><div class="stars" aria-hidden="true">★★★★★</div><span data-i18n="r_count"></span></div></div>
+      </div>
+      <div class="reviews">
+        <article class="card review"><div class="stars" aria-label="5/5">★★★★★</div><p data-i18n="r1"></p><footer><span class="avatar" style="background:var(--honey)">R</span>Raka</footer></article>
+        <article class="card review"><div class="stars" aria-label="5/5">★★★★★</div><p data-i18n="r2"></p><footer><span class="avatar" style="background:var(--pink);color:#fff">D</span>Dinda</footer></article>
+        <article class="card review"><div class="stars" aria-label="4/5">★★★★<span style="opacity:.3">★</span></div><p data-i18n="r3"></p><footer><span class="avatar" style="background:var(--teal);color:#fff">B</span>Bima</footer></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="faq">
+    <div class="wrap">
+      <div class="head"><h2 data-i18n="q_title"></h2></div>
+      <div class="faqgrid"><div class="faq">
+        <details class="card" open><summary data-i18n="q1"></summary><p data-i18n="a1"></p></details>
+        <details class="card"><summary data-i18n="q2"></summary><p data-i18n="a2"></p></details>
+        <details class="card"><summary data-i18n="q3"></summary><p data-i18n="a3"></p></details>
+        <details class="card"><summary data-i18n="q4"></summary><p data-i18n="a4"></p></details>
+        <details class="card"><summary data-i18n="q5"></summary><p data-i18n="a5"></p></details>
+      </div>
+      <aside class="card ask"><img src="img/bee.svg" alt=""><h3 data-i18n="ask_h"></h3><p data-i18n="ask_p"></p><a class="btn dark" href="#contact" data-i18n="ask_b"></a></aside></div>
+    </div>
+  </section>
+
+  <section class="block" id="contact">
+    <div class="wrap contact">
+      <div class="intro"><h2 data-i18n="c_title"></h2><p data-i18n="c_sub"></p></div>
+      <div class="cards">
+        <div class="card cc"><span class="eyebrow" data-i18n="c_name"></span><strong>Naufan Abdurrahman</strong></div>
+        <div class="card cc"><span class="eyebrow" data-i18n="c_class"></span><strong>X-3</strong></div>
+        <div class="card cc wide"><span class="eyebrow">Discord</span><strong>tanjiro_kamado92</strong></div>
+        <div class="card cc wide"><span class="eyebrow">Gmail</span><strong><a href="mailto:parkseoyeon2026@gmail.com">parkseoyeon2026@gmail.com</a></strong></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="stick"><div><strong id="sprice"></strong></div><button class="btn primary" id="sadd" data-i18n="add"></button></div>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot">
+      <div><div class="brand"><img src="img/logo.svg" alt="Fizzle"></div><p data-i18n="slogan" style="font-weight:600;margin:16px 0 0"></p></div>
+      <div><h4 data-i18n="f_shop"></h4><ul><li><a href="#shop" data-i18n="nav_shop"></a></li><li><a href="#gallery" data-i18n="g_title"></a></li><li><a href="#inside" data-i18n="nav_inside"></a></li></ul></div>
+      <div><h4 data-i18n="f_help"></h4><ul><li><a href="#faq" data-i18n="nav_faq"></a></li><li><a href="#contact" data-i18n="nav_contact"></a></li><li><a href="#reviews" data-i18n="nav_reviews"></a></li></ul></div>
+    </div>
+    <div class="legal"><span data-i18n="legal"></span><span data-i18n="credit"></span></div>
+  </div>
+</footer>
+
+<div class="scrim" data-close-cart></div>
+<aside class="drawer" aria-label="Cart" id="drawer">
+  <header><h3 data-i18n="c_cart"></h3><button class="x" data-close-cart data-i18n-label="close">×</button></header>
+  <div class="items" id="items"></div>
+  <div class="sum">
+    <div class="line"><span data-i18n="subtotal"></span><span id="subtotal"></span></div>
+    <button class="btn primary" id="checkout" data-i18n="checkout"></button>
+    <div class="notice" id="notice" data-i18n="notice"></div>
+  </div>
+</aside>
+
+<script>
+// ---------- words, in English and Indonesian ----------
+const T = {
+  en: {
+    mock: '<b>Design mockup</b> for a school project — not a real shop. Prices, reviews and nutrition values are examples.',
+    nav_shop: 'Shop', nav_inside: 'Ingredients', nav_reviews: 'Reviews', nav_faq: 'FAQ', nav_contact: 'Contact', cart: 'Cart', close: 'Close',
+    eyebrow: 'Fruit soda with real honey', h1: 'Sweetened<br><span class="hl">by bees.</span>',
+    lead: 'Sparkling fruit soda sweetened with real honey. Bright, fizzy, and best served ice cold.',
+    per: '/ bottle 330 ml', pack: 'Pack size', qty: 'Quantity', add: 'Add to cart', added: 'Added', buy: 'Buy now',
+    t1: 'Real honey', t2: 'Real fruit juice', t3: 'Recyclable glass', tag: 'New · 330 ml', alt_front: 'Fizzle bottle, front view',
+    g_title: 'Take a closer look', g_sub: 'A hexagonal glass bottle, shaped like the jar in our logo.',
+    g1: 'Angled view', g2: 'Front view', g3: 'Can 330 ml', g4: 'Label detail',
+    i_title: "What's inside", i_sub: 'Simple ingredients you can read out loud.',
+    f1h: 'Real honey', f1p: 'Sweetened with honey for a rounder, softer taste.',
+    f2h: 'Fruit first', f2p: 'Made with real orange and lemon juice.',
+    f3h: 'Fine bubbles', f3p: 'A lively fizz that stays crisp to the last sip.',
+    ingr_h: 'Ingredients', ingr: 'Carbonated water, fruit juice (orange, lemon), honey (8%), natural flavoring, citric acid.',
+    n_title: 'Nutrition facts (per 330 ml)', n_energy: 'Energy', n_fat: 'Total fat', n_protein: 'Protein', n_carb: 'Total carbohydrates', n_sugar: 'Sugars', n_sodium: 'Sodium', n_note: 'Example values for this mockup.',
+    r_pill: 'Example reviews', r_title: 'What people say', r_score: '4.8', r_count: 'out of 5 · 3 reviews',
+    r1: '“Not too sweet, and you can really taste the honey. Perfect after school.”',
+    r2: '“The bottle looks so good on the table. My friends kept asking what it was.”',
+    r3: '“Fizzy, fresh and fruity. I keep a 6-pack in the fridge now.”',
+    q_title: 'Questions',
+    q1: 'Is there real honey in Fizzle?', a1: 'Yes. Honey is one of the main ingredients and gives Fizzle its sweetness.',
+    q2: 'How should I store it?', a2: 'Keep it in a cool place away from sunlight, and chill it before drinking. Once opened, finish it within a day.',
+    q3: 'Is the bottle recyclable?', a3: 'Yes. The bottle is glass and the cap is metal, and both can be recycled.',
+    q4: 'Do you deliver across Indonesia?', a4: 'This is a design mockup, so no orders are shipped. In a real shop, delivery options would appear at checkout.',
+    q5: 'Can I order for an event?', a5: 'Choose the 12-pack, or get in touch using the contact details below.',
+    ask_h: 'Still have a question?', ask_p: 'Send a message and the designer will get back to you.', ask_b: 'Contact us',
+    c_title: 'Contact', c_sub: 'Fizzle is a school brand project. Questions or feedback? You can reach the designer here.', c_name: 'Designer', c_class: 'Class',
+    slogan: 'Sweetened by bees.', f_shop: 'Shop', f_help: 'Help',
+    legal: '© 2026 Fizzle. A school design project — not a real shop.', credit: 'Designed by Naufan Abdurrahman, X-3',
+    c_cart: 'Your cart', empty: 'Your cart is empty.', subtotal: 'Subtotal', checkout: 'Checkout', remove: 'Remove',
+    notice: 'This is a design mockup. No payment is taken.', product: 'Fizzle Fruit & Honey Soda'
+  },
+  id: {
+    mock: '<b>Mockup desain</b> untuk tugas sekolah — bukan toko sungguhan. Harga, ulasan, dan nilai gizi hanyalah contoh.',
+    nav_shop: 'Belanja', nav_inside: 'Bahan', nav_reviews: 'Ulasan', nav_faq: 'FAQ', nav_contact: 'Kontak', cart: 'Keranjang', close: 'Tutup',
+    eyebrow: 'Soda buah dengan madu asli', h1: 'Manisnya<br><span class="hl">dari lebah.</span>',
+    lead: 'Soda buah berkarbonasi yang dimaniskan dengan madu asli. Segar, penuh gelembung, dan paling enak diminum dingin.',
+    per: '/ botol 330 ml', pack: 'Ukuran paket', qty: 'Jumlah', add: '+ Keranjang', added: 'Ditambahkan', buy: 'Beli sekarang',
+    t1: 'Madu asli', t2: 'Jus buah asli', t3: 'Kaca bisa didaur ulang', tag: 'Baru · 330 ml', alt_front: 'Botol Fizzle, tampak depan',
+    g_title: 'Lihat lebih dekat', g_sub: 'Botol kaca segi enam, bentuknya seperti toples di logo kami.',
+    g1: 'Tampak samping', g2: 'Tampak depan', g3: 'Kaleng 330 ml', g4: 'Detail label',
+    i_title: 'Isi di dalamnya', i_sub: 'Bahan sederhana yang mudah dibaca.',
+    f1h: 'Madu asli', f1p: 'Dimaniskan dengan madu, rasanya lebih lembut.',
+    f2h: 'Buah dulu', f2p: 'Dibuat dengan jus jeruk dan lemon asli.',
+    f3h: 'Gelembung halus', f3p: 'Sodanya tetap segar sampai tegukan terakhir.',
+    ingr_h: 'Komposisi', ingr: 'Air berkarbonasi, jus buah (jeruk, lemon), madu (8%), perisa alami, asam sitrat.',
+    n_title: 'Informasi nilai gizi (per 330 ml)', n_energy: 'Energi', n_fat: 'Lemak total', n_protein: 'Protein', n_carb: 'Karbohidrat total', n_sugar: 'Gula', n_sodium: 'Natrium', n_note: 'Nilai contoh untuk mockup ini.',
+    r_pill: 'Contoh ulasan', r_title: 'Kata mereka', r_score: '4,8', r_count: 'dari 5 · 3 ulasan',
+    r1: '“Tidak terlalu manis, dan rasa madunya benar-benar terasa. Pas buat pulang sekolah.”',
+    r2: '“Botolnya bagus banget di meja. Teman-teman terus bertanya ini minuman apa.”',
+    r3: '“Segar, berbuih, dan berasa buah. Sekarang aku selalu simpan paket isi 6 di kulkas.”',
+    q_title: 'Pertanyaan',
+    q1: 'Apakah Fizzle pakai madu asli?', a1: 'Ya. Madu adalah salah satu bahan utama dan memberi rasa manis pada Fizzle.',
+    q2: 'Bagaimana cara menyimpannya?', a2: 'Simpan di tempat sejuk, jauhkan dari sinar matahari, dan dinginkan sebelum diminum. Setelah dibuka, habiskan dalam satu hari.',
+    q3: 'Apakah botolnya bisa didaur ulang?', a3: 'Ya. Botolnya dari kaca dan tutupnya dari logam, keduanya bisa didaur ulang.',
+    q4: 'Apakah bisa kirim ke seluruh Indonesia?', a4: 'Ini adalah mockup desain, jadi tidak ada pesanan yang dikirim. Di toko sungguhan, pilihan pengiriman akan muncul saat checkout.',
+    q5: 'Bisa pesan untuk acara?', a5: 'Pilih paket isi 12, atau hubungi kami lewat kontak di bawah.',
+    ask_h: 'Masih ada pertanyaan?', ask_p: 'Kirim pesan, nanti desainernya akan membalas.', ask_b: 'Hubungi kami',
+    c_title: 'Kontak', c_sub: 'Fizzle adalah proyek brand untuk tugas sekolah. Ada pertanyaan atau masukan? Hubungi desainernya di sini.', c_name: 'Desainer', c_class: 'Kelas',
+    slogan: 'Manisnya dari lebah.', f_shop: 'Belanja', f_help: 'Bantuan',
+    legal: '© 2026 Fizzle. Proyek desain sekolah — bukan toko sungguhan.', credit: 'Didesain oleh Naufan Abdurrahman, X-3',
+    c_cart: 'Keranjang kamu', empty: 'Keranjangmu masih kosong.', subtotal: 'Subtotal', checkout: 'Lanjut ke pembayaran', remove: 'Hapus',
+    notice: 'Ini mockup desain. Tidak ada pembayaran yang diproses.', product: 'Fizzle Soda Buah & Madu'
+  }
+};
+// ---------- the packs and the cart ----------
+const PACKS = [
+  { id: 'p1', n: 1, price: 15000, en: '1 bottle', id_: '1 botol' },
+  { id: 'p6', n: 6, price: 85000, en: '6-pack', id_: 'Isi 6' },
+  { id: 'p12', n: 12, price: 160000, en: '12-pack', id_: 'Isi 12' }
+];
+const rp = v => 'Rp ' + v.toLocaleString('id-ID');
+let lang = 'en', pack = PACKS[0], qty = 1;
+const cart = new Map(); // pack id -> quantity
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const t = k => T[lang][k];
+
+function render() {
+  document.documentElement.lang = lang;
+  $$('[data-i18n]').forEach(e => { e.textContent = t(e.dataset.i18n); });
+  $$('[data-i18n-html]').forEach(e => { e.innerHTML = t(e.dataset.i18nHtml); });
+  $$('[data-i18n-label]').forEach(e => e.setAttribute('aria-label', t(e.dataset.i18nLabel)));
+  $$('[data-i18n-alt]').forEach(e => e.setAttribute('alt', t(e.dataset.i18nAlt)));
+  $$('[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+  $('#packs').innerHTML = PACKS.map(p => `<button class="pack" data-pack="${p.id}" aria-pressed="${p === pack}"><span>${lang === 'en' ? p.en : p.id_}</span><small>${rp(p.price)}</small></button>`).join('');
+  $('#price').textContent = rp(pack.price);
+  $('#per').textContent = pack.n === 1 ? t('per') : (lang === 'en' ? `/ ${pack.n} bottles` : `/ ${pack.n} botol`);
+  $('#sprice').textContent = rp(pack.price * qty);
+  $('#q').textContent = qty;
+  drawCart();
+}
+function drawCart() {
+  const n = [...cart.values()].reduce((a, b) => a + b, 0);
+  $('#count').textContent = n; $('#count').dataset.n = n;
+  const rows = [...cart.entries()].map(([id, q]) => {
+    const p = PACKS.find(x => x.id === id);
+    return `<div class="card item"><img src="img/front.jpg" alt=""><div><h4>${t('product')}</h4><div class="meta">${lang === 'en' ? p.en : p.id_} · ${rp(p.price)}</div>
+      <div class="row"><div class="qty"><button data-cq="${id}" data-d="-1" aria-label="−">−</button><output>${q}</output><button data-cq="${id}" data-d="1" aria-label="+">+</button></div><button class="rm" data-rm="${id}">${t('remove')}</button></div></div></div>`;
+  });
+  $('#items').innerHTML = rows.length ? rows.join('') : `<p class="empty">${t('empty')}</p>`;
+  $('#subtotal').textContent = rp([...cart.entries()].reduce((a, [id, q]) => a + PACKS.find(x => x.id === id).price * q, 0));
+  $('#checkout').disabled = !rows.length;
+}
+function add(open) {
+  cart.set(pack.id, (cart.get(pack.id) || 0) + qty);
+  drawCart();
+  const c = $('#count'); c.classList.remove('bump'); void c.offsetWidth; c.classList.add('bump');
+  const b = $('#add'), label = b.querySelector('span');
+  b.classList.add('added'); label.textContent = t('added');
+  setTimeout(() => { b.classList.remove('added'); label.textContent = t('add'); }, 1400);
+  if (open) openCart();
+}
+const openCart = () => { document.body.classList.add('cart-open'); $('#notice').classList.remove('show'); };
+const closeCart = () => document.body.classList.remove('cart-open');
+
+document.addEventListener('click', e => {
+  const el = e.target.closest('button, [data-close-cart]');
+  if (!el) return;
+  if (el.dataset.lang) { lang = el.dataset.lang; render(); }
+  else if (el.dataset.pack) { pack = PACKS.find(p => p.id === el.dataset.pack); render(); }
+  else if (el.dataset.q) { qty = Math.max(1, Math.min(24, qty + +el.dataset.q)); render(); }
+  else if (el.id === 'add' || el.id === 'sadd') add(false);
+  else if (el.id === 'buy') add(true);
+  else if (el.hasAttribute('data-open-cart')) openCart();
+  else if (el.hasAttribute('data-close-cart')) closeCart();
+  else if (el.dataset.cq) { const q = (cart.get(el.dataset.cq) || 0) + +el.dataset.d; q > 0 ? cart.set(el.dataset.cq, q) : cart.delete(el.dataset.cq); drawCart(); }
+  else if (el.dataset.rm) { cart.delete(el.dataset.rm); drawCart(); }
+  else if (el.id === 'checkout') $('#notice').classList.add('show');
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
+// (for the screenshots: ?lang=id, ?cart=open)
+const qs = new URLSearchParams(location.search);
+if (qs.get('lang') === 'id') lang = 'id';
+render();
+if (qs.get('cart') === 'open') {
+  // (opened without the slide: a background tab does not run transitions)
+  $('#drawer').style.transition = $('.scrim').style.transition = 'none';
+  pack = PACKS[1]; qty = 1; add(false); pack = PACKS[0]; add(false); render(); openCart();
+}
+</script>
+</body>
+</html>
