@@ -167,7 +167,7 @@ footer.site { background: var(--bee); color: var(--cream); margin-top: 40px; pad
 .legal { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255, 244, 220, .2); font-size: 13px; opacity: .8; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 
 /* cart drawer */
-.scrim { position: fixed; inset: 0; background: rgba(27, 31, 68, .45); opacity: 0; pointer-events: none; transition: opacity .3s; z-index: 40; }
+.scrim { position: fixed; inset: 0; background: rgba(58, 27, 11, .45); opacity: 0; pointer-events: none; transition: opacity .3s; z-index: 40; }
 .drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(440px, 100%); background: var(--paper); border-left: var(--line); z-index: 41; display: flex; flex-direction: column; transform: translateX(100%); transition: transform .38s cubic-bezier(.2, .8, .2, 1); }
 body.cart-open .scrim { opacity: 1; pointer-events: auto; }
 body.cart-open .drawer { transform: none; }
@@ -189,6 +189,39 @@ body.cart-open .drawer { transform: none; }
 .sum .btn { width: 100%; }
 .sum .notice { display: none; font-size: 14px; background: var(--honey); border: var(--line); border-radius: 12px; padding: 10px 14px; font-weight: 600; }
 .sum .notice.show { display: block; }
+
+/* the ad: a section with the film, and the same film as a pop-up with a Skip countdown */
+.adcard { overflow: hidden; aspect-ratio: 16 / 9; background: #000; }
+.adcard video { display: block; width: 100%; height: 100%; }
+.adrow { display: flex; justify-content: center; margin-top: 24px; }
+.adpop { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 20px; background: rgba(58, 27, 11, .62); opacity: 0; transition: opacity .25s; }
+.adpop[hidden] { display: none; }
+.adpop.show { opacity: 1; }
+.adbox { position: relative; width: min(960px, 100%); background: #000; border: var(--line); border-radius: var(--r); box-shadow: var(--shadow); overflow: hidden; transform: translateY(16px) scale(.98); transition: transform .35s cubic-bezier(.16, 1, .3, 1); }
+.adpop.show .adbox { transform: none; }
+.adtop { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--paper); border-bottom: var(--line); font-size: 14px; font-weight: 600; }
+.adtop .badge { background: var(--honey); border-radius: 6px; padding: 1px 9px; font-weight: 700; }
+.adtop .time { margin-left: auto; font-variant-numeric: tabular-nums; opacity: .75; }
+.adstage { position: relative; aspect-ratio: 16 / 9; }
+.adstage video { display: block; width: 100%; height: 100%; }
+.adctl { position: absolute; left: 16px; right: 16px; bottom: 25px; display: flex; justify-content: space-between; gap: 12px; pointer-events: none; }
+.adctl .adbtn { pointer-events: auto; }
+.adbtn { display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 18px; border-radius: 12px; font-weight: 700; font-size: 16px; color: #fff; background: rgba(10, 10, 10, .72); border: 2px solid rgba(255, 255, 255, .4); }
+.adbtn svg { width: 18px; height: 18px; }
+#adskip[aria-disabled="true"] { opacity: .85; cursor: default; font-weight: 600; }
+#adskip.ready { border-color: rgba(255, 255, 255, .9); }
+#adskip.ready:hover { background: rgba(10, 10, 10, .9); }
+#adsite { background: var(--orange); color: var(--bee); border-color: var(--bee); }
+#adsound { position: absolute; top: 14px; right: 16px; height: 40px; padding: 0 14px; font-size: 14px; }
+.adbar { position: absolute; left: 0; right: 0; bottom: 0; height: 5px; background: rgba(255, 255, 255, .3); }
+.adbar i { display: block; height: 100%; width: 0; background: var(--honey); }
+@media (max-width: 860px) {
+  .adpop { padding: 12px; }
+  .adctl { position: static; padding: 10px; background: var(--paper); border-top: var(--line); }
+  .adbtn { height: 42px; font-size: 14px; padding: 0 14px; }
+  #adskip { color: var(--cream); background: var(--bee); border-color: var(--bee); }
+  #adsound { top: 8px; right: 8px; height: 32px; font-size: 12px; padding: 0 10px; }
+}
 
 /* the sticky buy bar on phones */
 .stick { display: none; }
@@ -297,6 +330,14 @@ body.cart-open .drawer { transform: none; }
     </div>
   </section>
 
+  <section class="block" id="ad">
+    <div class="wrap">
+      <div class="head"><h2 data-i18n="ad_title"></h2><p data-i18n="ad_sub"></p></div>
+      <div class="card adcard"><video controls preload="none" playsinline poster="media/fizzle-ad-poster.jpg" src="media/fizzle-ad.mp4" data-i18n-label="ad_title"></video></div>
+      <div class="adrow"><button class="btn dark" data-open-ad data-i18n="ad_again"></button></div>
+    </div>
+  </section>
+
   <section class="block" id="inside">
     <div class="wrap">
       <div class="head"><h2 data-i18n="i_title"></h2><p data-i18n="i_sub"></p></div>
@@ -390,6 +431,21 @@ body.cart-open .drawer { transform: none; }
   </div>
 </aside>
 
+<div class="adpop" id="adpop" role="dialog" aria-modal="true" data-i18n-label="ad_aria" hidden>
+  <div class="adbox" tabindex="-1">
+    <div class="adtop"><span class="badge" data-i18n="ad_label"></span><span data-i18n="ad_from"></span><span class="time" id="adtime">0:20</span></div>
+    <div class="adstage">
+      <video id="advideo" playsinline preload="auto" poster="media/fizzle-ad-poster.jpg" src="media/fizzle-ad.mp4"></video>
+      <button class="adbtn" id="adsound"></button>
+      <div class="adbar"><i id="adbar"></i></div>
+    </div>
+    <div class="adctl">
+      <button class="adbtn" id="adsite" data-i18n="ad_visit"></button>
+      <button class="adbtn" id="adskip" aria-disabled="true"><span></span><svg viewBox="0 0 26 26" aria-hidden="true"><path d="M4,3L17,13L4,23Z" fill="currentColor"/><rect x="19" y="3" width="4" height="20" rx="1" fill="currentColor"/></svg></button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ---------- words, in English and Indonesian ----------
 const T = {
@@ -423,7 +479,10 @@ const T = {
     slogan: 'Sweetened by bees.', f_shop: 'Shop', f_help: 'Help',
     legal: '© 2026 Fizzle. A school design project — not a real shop.', credit: 'Designed by Naufan Abdurrahman, X-3',
     c_cart: 'Your cart', empty: 'Your cart is empty.', subtotal: 'Subtotal', checkout: 'Checkout', remove: 'Remove',
-    notice: 'This is a design mockup. No payment is taken.', product: 'Fizzle Fruit & Honey Soda'
+    notice: 'This is a design mockup. No payment is taken.', product: 'Fizzle Fruit & Honey Soda',
+    ad_title: 'Watch our ad', ad_sub: 'Twenty seconds of fruit, honey and fizz.', ad_again: 'Play it as a pop-up ad',
+    ad_aria: 'Advertisement', ad_label: 'Ad', ad_from: 'Sponsored · Fizzle', ad_visit: 'Shop now',
+    skip_in: 'Skip in {n}', skip: 'Skip ad', sound_on: 'Sound on', sound_off: 'Mute'
   },
   id: {
     mock: '<b>Mockup desain</b> untuk tugas sekolah — bukan toko sungguhan. Harga, ulasan, dan nilai gizi hanyalah contoh.',
@@ -455,7 +514,10 @@ const T = {
     slogan: 'Manisnya dari lebah.', f_shop: 'Belanja', f_help: 'Bantuan',
     legal: '© 2026 Fizzle. Proyek desain sekolah — bukan toko sungguhan.', credit: 'Didesain oleh Naufan Abdurrahman, X-3',
     c_cart: 'Keranjang kamu', empty: 'Keranjangmu masih kosong.', subtotal: 'Subtotal', checkout: 'Lanjut ke pembayaran', remove: 'Hapus',
-    notice: 'Ini mockup desain. Tidak ada pembayaran yang diproses.', product: 'Fizzle Soda Buah & Madu'
+    notice: 'Ini mockup desain. Tidak ada pembayaran yang diproses.', product: 'Fizzle Soda Buah & Madu',
+    ad_title: 'Tonton iklan kami', ad_sub: 'Dua puluh detik buah, madu, dan gelembung.', ad_again: 'Putar sebagai iklan pop-up',
+    ad_aria: 'Iklan', ad_label: 'Iklan', ad_from: 'Bersponsor · Fizzle', ad_visit: 'Belanja sekarang',
+    skip_in: 'Lewati dalam {n}', skip: 'Lewati iklan', sound_on: 'Nyalakan suara', sound_off: 'Matikan suara'
   }
 };
 // ---------- the packs and the cart ----------
@@ -483,6 +545,7 @@ function render() {
   $('#sprice').textContent = rp(pack.price * qty);
   $('#q').textContent = qty;
   drawCart();
+  tickAd();
 }
 function drawCart() {
   const n = [...cart.values()].reduce((a, b) => a + b, 0);
@@ -508,6 +571,41 @@ function add(open) {
 const openCart = () => { document.body.classList.add('cart-open'); $('#notice').classList.remove('show'); };
 const closeCart = () => document.body.classList.remove('cart-open');
 
+// ---------- the pop-up ad: the film plays muted (browsers block sound until a click); Skip unlocks after 5 seconds ----------
+const AD_SKIP = 5, adPop = $('#adpop'), adVid = $('#advideo');
+let adT0 = 0, adTimer = 0, adFrom = null;
+const adReady = () => !adPop.hidden && performance.now() - adT0 >= AD_SKIP * 1000;
+function tickAd() {
+  const left = Math.ceil(AD_SKIP - (performance.now() - adT0) / 1000), ok = left <= 0, sk = $('#adskip');
+  sk.setAttribute('aria-disabled', String(!ok)); sk.classList.toggle('ready', ok);
+  sk.querySelector('span').textContent = ok ? t('skip') : t('skip_in').replace('{n}', left);
+  sk.querySelector('svg').style.display = ok ? '' : 'none';
+  $('#adsound').textContent = adVid.muted ? t('sound_on') : t('sound_off');
+  const d = adVid.duration || 20;
+  $('#adbar').style.width = (100 * adVid.currentTime / d) + '%';
+  $('#adtime').textContent = '0:' + String(Math.max(0, Math.round(d - adVid.currentTime))).padStart(2, '0');
+}
+function openAd(still) {
+  adFrom = document.activeElement;
+  adPop.hidden = false;
+  adT0 = performance.now() - (still ? AD_SKIP * 1000 : 0);
+  if (still) adPop.style.transition = $('.adbox').style.transition = 'none';
+  requestAnimationFrame(() => adPop.classList.add('show'));
+  adVid.currentTime = 0; adVid.muted = true;
+  if (!still && !matchMedia('(prefers-reduced-motion: reduce)').matches) { const p = adVid.play(); if (p) p.catch(() => {}); }
+  else if (!still) adVid.controls = true;
+  clearInterval(adTimer); adTimer = setInterval(tickAd, 200); tickAd();
+  $('.adbox').focus();
+}
+function closeAd() {
+  if (adPop.hidden) return;
+  clearInterval(adTimer); adVid.pause(); adPop.classList.remove('show');
+  setTimeout(() => { adPop.hidden = true; }, 250);
+  if (adFrom && adFrom.focus) adFrom.focus();
+}
+adVid.addEventListener('ended', closeAd);
+adVid.addEventListener('timeupdate', tickAd);
+
 document.addEventListener('click', e => {
   const el = e.target.closest('button, [data-close-cart]');
   if (!el) return;
@@ -521,9 +619,13 @@ document.addEventListener('click', e => {
   else if (el.dataset.cq) { const q = (cart.get(el.dataset.cq) || 0) + +el.dataset.d; q > 0 ? cart.set(el.dataset.cq, q) : cart.delete(el.dataset.cq); drawCart(); }
   else if (el.dataset.rm) { cart.delete(el.dataset.rm); drawCart(); }
   else if (el.id === 'checkout') $('#notice').classList.add('show');
+  else if (el.id === 'adskip') { if (adReady()) closeAd(); }
+  else if (el.id === 'adsound') { adVid.muted = !adVid.muted; if (adVid.paused) { const p = adVid.play(); if (p) p.catch(() => {}); } tickAd(); }
+  else if (el.id === 'adsite') { closeAd(); $('#shop').scrollIntoView(); }
+  else if (el.hasAttribute('data-open-ad')) openAd(false);
 });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
-// (for the screenshots: ?lang=id, ?cart=open)
+document.addEventListener('keydown', e => { if (e.key !== 'Escape') return; if (!adPop.hidden) { if (adReady()) closeAd(); } else closeCart(); });
+// (for the screenshots: ?lang=id, ?cart=open, ?ad=0 (no pop-up), ?ad=open (the pop-up, still, skippable))
 const qs = new URLSearchParams(location.search);
 if (qs.get('lang') === 'id') lang = 'id';
 render();
@@ -531,6 +633,13 @@ if (qs.get('cart') === 'open') {
   // (opened without the slide: a background tab does not run transitions)
   $('#drawer').style.transition = $('.scrim').style.transition = 'none';
   pack = PACKS[1]; qty = 1; add(false); pack = PACKS[0]; add(false); render(); openCart();
+}
+// the pop-up ad, once a visit, a moment after the page opens
+if (qs.get('ad') === 'open') openAd(true);
+else if (qs.get('ad') !== '0' && qs.get('cart') !== 'open') {
+  let seen = false;
+  try { seen = sessionStorage.getItem('fizzle-ad') === '1'; sessionStorage.setItem('fizzle-ad', '1'); } catch (e) { /* storage blocked: show it */ }
+  if (!seen) setTimeout(() => openAd(false), 1500);
 }
 </script>
 </body>
