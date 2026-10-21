@@ -19,6 +19,7 @@
   --wrap: 1200px; --gap: 24px; --r: 18px;
 }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { scroll-behavior: smooth; }
 body { margin: 0; font-family: Poppins, system-ui, sans-serif; color: var(--bee); background: var(--cream); font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
 body::before { content: ''; position: fixed; inset: 0; z-index: -1; background: radial-gradient(circle, #F2DDB2 1.6px, transparent 1.8px) 0 0 / 28px 28px; opacity: .55; }
@@ -31,8 +32,8 @@ h1, h2, h3 { margin: 0; line-height: 1.05; letter-spacing: -.02em; }
 h2 { font-size: 44px; font-weight: 800; }
 .card { background: #fff; border: var(--line); border-radius: var(--r); box-shadow: var(--shadow); }
 
-/* the notice that this is a mockup */
-.mock { background: var(--bee); color: var(--cream); font-size: 13px; text-align: center; padding: 8px 16px; }
+/* the notice that this is a mockup: the last line of the page */
+.mock { background: #2A1307; color: var(--cream); font-size: 13px; text-align: center; padding: 14px 16px; }
 .mock b { color: var(--honey); font-weight: 700; }
 
 /* header */
@@ -187,8 +188,6 @@ body.cart-open .drawer { transform: none; }
 .sum { border-top: var(--line); padding: 20px 24px 24px; display: grid; gap: 14px; }
 .sum .line { display: flex; justify-content: space-between; font-size: 18px; font-weight: 700; }
 .sum .btn { width: 100%; }
-.sum .notice { display: none; font-size: 14px; background: var(--honey); border: var(--line); border-radius: 12px; padding: 10px 14px; font-weight: 600; }
-.sum .notice.show { display: block; }
 
 /* the ad: a section with the film, and the same film as a pop-up with a Skip countdown */
 .adcard { overflow: hidden; aspect-ratio: 16 / 9; background: #000; }
@@ -222,6 +221,103 @@ body.cart-open .drawer { transform: none; }
   #adskip { color: var(--cream); background: var(--bee); border-color: var(--bee); }
   #adsound { top: 8px; right: 8px; height: 32px; font-size: 12px; padding: 0 10px; }
 }
+
+/* the checkout: a bee-themed fake payment (nothing is sent, no card numbers) */
+.co { position: fixed; inset: 0; z-index: 70; display: grid; place-items: center; padding: 20px; background: rgba(58, 27, 11, .6); }
+.co[hidden] { display: none; }
+.cobox { width: min(1040px, 100%); max-height: calc(100vh - 40px); overflow: auto; background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0L56 16v32L28 64 0 48V16zM28 64v33M0 16L-28 0M56 16L84 0' fill='none' stroke='%23F6D9A8' stroke-width='2'/%3E%3C/svg%3E"); border: var(--line); border-radius: var(--r); box-shadow: 8px 8px 0 var(--bee); animation: coin .35s cubic-bezier(.16, 1, .3, 1); }
+@keyframes coin { from { transform: translateY(18px) scale(.98); opacity: 0; } }
+.cotop { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: 18px; padding: 14px 20px; background: var(--orange); border-bottom: var(--line); }
+.cotop img { height: 40px; width: auto; }
+.cotop .title { font-weight: 800; font-size: 18px; }
+.steps { display: flex; gap: 6px; margin: 0 0 0 auto; padding: 0; list-style: none; }
+.steps li { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; opacity: .55; }
+.steps li + li::before { content: ''; width: 22px; height: 2px; background: var(--bee); opacity: .5; }
+.steps i { display: grid; place-items: center; width: 30px; height: 34px; font-style: normal; font-weight: 800; background: var(--cream); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+.steps li.on { opacity: 1; }
+.steps li.on i { background: var(--bee); color: var(--honey); }
+.steps li.done i { background: var(--honey); }
+.cotop .x { flex: none; }
+.cobody { display: grid; grid-template-columns: 1fr 340px; gap: 24px; padding: 24px; }
+.copane h3 { font-size: 26px; font-weight: 800; margin-bottom: 6px; }
+.conote { margin: 0 0 18px; font-size: 14px; opacity: .75; }
+.cogrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.cogrid label { display: grid; gap: 6px; font-size: 14px; font-weight: 600; }
+.cogrid .full { grid-column: 1 / -1; }
+.cogrid input, .cogrid textarea { font: inherit; font-size: 16px; padding: 12px 14px; border: var(--line); border-radius: 12px; background: #fff; color: var(--bee); resize: vertical; }
+.cogrid input:focus-visible, .cogrid textarea:focus-visible { outline: 3px solid var(--honey); outline-offset: 1px; }
+.cogrid .bad { border-color: #C2410C; background: #FFF4EC; }
+.linkbtn { margin-top: 12px; border: 0; background: none; padding: 0; font-weight: 700; font-size: 14px; text-decoration: underline; }
+.coerr { min-height: 22px; margin-top: 10px; font-size: 14px; font-weight: 600; color: #B23A0A; }
+.coact { display: flex; justify-content: space-between; gap: 12px; margin-top: 18px; }
+.coact .btn:only-child { margin-left: auto; }
+.btn.ghost { background: #fff; }
+.pms { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.pm { display: grid; grid-template-columns: 52px 1fr; gap: 4px 12px; align-items: center; text-align: left; padding: 14px; background: #fff; border: var(--line); border-radius: 14px; box-shadow: 3px 3px 0 var(--bee); transition: transform .15s, box-shadow .15s, background .15s; }
+.pm:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--bee); }
+.pm[aria-checked="true"] { background: var(--honey); }
+.pm .ico { grid-row: span 2; display: grid; place-items: center; width: 52px; height: 58px; background: var(--orange); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+.pm .ico svg { width: 26px; height: 26px; }
+.pm b { font-size: 16px; }
+.pm small { font-size: 13px; opacity: .75; line-height: 1.3; }
+.pmd { margin-top: 16px; padding: 16px; background: #fff; border: var(--line); border-radius: 14px; min-height: 96px; }
+.pmd[hidden] { display: none; }
+.pmd .row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.pmd .va { font-size: 22px; font-weight: 800; letter-spacing: .06em; font-variant-numeric: tabular-nums; }
+.pmd .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+.chip { padding: 6px 14px; border: var(--line); border-radius: 999px; background: #fff; font-size: 14px; font-weight: 600; }
+.chip[aria-pressed="true"] { background: var(--bee); color: var(--cream); }
+.qr { width: 150px; height: 150px; flex: none; }
+.cosum { align-self: start; position: sticky; top: 90px; background: #fff; border: var(--line); border-radius: 16px; box-shadow: var(--shadow); padding: 18px; }
+.cosum h4 { margin: 0 0 12px; font-size: 18px; font-weight: 800; }
+.cosum .it { display: grid; grid-template-columns: 48px 1fr auto; gap: 10px; align-items: center; font-size: 14px; padding: 8px 0; border-bottom: 1px dashed #E3CBA4; }
+.cosum .it img { width: 48px; height: 58px; object-fit: cover; border-radius: 8px; border: var(--line); }
+.cosum .ln { display: flex; justify-content: space-between; font-size: 14px; margin-top: 10px; }
+.cosum .ln.total { font-size: 19px; font-weight: 800; border-top: var(--line); padding-top: 12px; margin-top: 14px; }
+.cosum .free { color: #1F7A3D; font-weight: 700; }
+.cosum .demo { margin: 14px 0 0; font-size: 12px; opacity: .7; }
+/* paying: a honeycomb filling with honey */
+.paying { display: grid; justify-items: center; gap: 18px; padding: 40px 0; text-align: center; }
+.comb { width: 150px; height: 150px; }
+.comb .cell { fill: var(--cream); stroke: var(--bee); stroke-width: 5; animation: honey 1.6s ease-in-out infinite; }
+@keyframes honey { 0%, 15% { fill: var(--cream); } 45%, 70% { fill: var(--honey); } 100% { fill: var(--cream); } }
+.paying p { margin: 0; font-weight: 700; font-size: 18px; }
+/* thank you: the bee flies in with the parcel, bubbles behind it, honeycomb confetti */
+.ty { position: relative; overflow: hidden; display: grid; justify-items: center; text-align: center; gap: 14px; padding: 0 0 30px; }
+.sky { position: relative; width: 100%; height: 300px; background: var(--orange); border-bottom: var(--line); overflow: hidden; }
+.sky::before { content: ''; position: absolute; inset: -50%; background: repeating-conic-gradient(from 0deg at 50% 60%, #FFA341 0 6deg, transparent 6deg 18deg); animation: spin 30s linear infinite; }
+@keyframes spin { to { transform: rotate(1turn); } }
+.flybee { position: absolute; left: 50%; top: 22px; width: 210px; margin-left: -105px; animation: flyin 1.5s cubic-bezier(.2, .8, .2, 1) both, hover 2.4s ease-in-out 1.5s infinite; }
+@keyframes flyin { 0% { transform: translate(-130vw, 120px) rotate(-14deg); } 55% { transform: translate(40px, -30px) rotate(8deg); } 80% { transform: translate(-10px, 8px) rotate(-3deg); } 100% { transform: none; } }
+@keyframes hover { 50% { transform: translateY(-12px) rotate(2deg); } }
+.flybee .wing { transform-box: fill-box; transform-origin: 50% 90%; animation: flap .07s ease-in-out infinite alternate; }
+@keyframes flap { to { transform: scaleY(.4); } }
+.flybee .parcel { transform-box: view-box; transform-origin: 10px 62px; animation: swing 1.4s ease-in-out infinite alternate; }
+@keyframes swing { from { transform: rotate(-7deg); } to { transform: rotate(7deg); } }
+.bub { position: absolute; border: 3px solid var(--cream); border-radius: 50%; pointer-events: none; animation: bub 1.6s ease-out forwards; }
+@keyframes bub { to { transform: translate(var(--dx), -70px) scale(.4); opacity: 0; } }
+.conf { position: absolute; top: -20px; width: 18px; height: 20px; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); animation: conf var(--t) cubic-bezier(.3, .6, .5, 1) var(--d) forwards; }
+@keyframes conf { to { transform: translate(var(--dx), 340px) rotate(var(--r)); } }
+.tyh { font-size: 34px; font-weight: 800; margin-top: 6px; }
+.tyh span { display: inline-block; animation: pop .5s cubic-bezier(.34, 1.56, .64, 1) both; }
+@keyframes pop { from { transform: translateY(20px) scale(.5); opacity: 0; } }
+.ty p { margin: 0; max-width: 30em; }
+.tycard { display: grid; grid-template-columns: repeat(3, auto); gap: 6px 28px; justify-content: center; padding: 14px 22px; background: #fff; border: var(--line); border-radius: 14px; box-shadow: var(--shadow); font-size: 14px; text-align: left; }
+.tycard span { opacity: .7; font-size: 12px; text-transform: uppercase; letter-spacing: .1em; font-weight: 700; }
+.tycard b { font-size: 16px; }
+@media (max-width: 860px) {
+  .co { padding: 0; }
+  .cobox { max-height: 100vh; height: 100%; border-radius: 0; box-shadow: none; }
+  .cotop { gap: 10px; padding: 10px 14px; }
+  .cotop img { height: 30px; }
+  .cotop .title, .steps span { display: none; }
+  .cobody { grid-template-columns: 1fr; padding: 16px; }
+  .cosum { position: static; }
+  .cogrid, .pms { grid-template-columns: 1fr; }
+  .tycard { grid-template-columns: 1fr; }
+  .tyh { font-size: 26px; }
+}
+@media (prefers-reduced-motion: reduce) { .flybee, .flybee .wing, .flybee .parcel, .sky::before, .comb .cell { animation: none !important; } .comb .cell { fill: var(--honey); } }
 
 /* the sticky buy bar on phones */
 .stick { display: none; }
@@ -261,8 +357,6 @@ body.cart-open .drawer { transform: none; }
 </style>
 </head>
 <body>
-<div class="mock" data-i18n-html="mock"></div>
-
 <header>
   <div class="wrap bar">
     <a class="logo" href="#top" aria-label="Fizzle"><img src="img/logo.svg" alt="Fizzle"></a>
@@ -420,6 +514,8 @@ body.cart-open .drawer { transform: none; }
   </div>
 </footer>
 
+<div class="mock" data-i18n-html="mock"></div>
+
 <div class="scrim" data-close-cart></div>
 <aside class="drawer" aria-label="Cart" id="drawer">
   <header><h3 data-i18n="c_cart"></h3><button class="x" data-close-cart data-i18n-label="close">×</button></header>
@@ -427,9 +523,66 @@ body.cart-open .drawer { transform: none; }
   <div class="sum">
     <div class="line"><span data-i18n="subtotal"></span><span id="subtotal"></span></div>
     <button class="btn primary" id="checkout" data-i18n="checkout"></button>
-    <div class="notice" id="notice" data-i18n="notice"></div>
   </div>
 </aside>
+
+<div class="co" id="co" role="dialog" aria-modal="true" data-i18n-label="co_aria" hidden>
+  <div class="cobox" tabindex="-1">
+    <div class="cotop">
+      <img src="img/logo.svg" alt="Fizzle"><span class="title" data-i18n="co_title"></span>
+      <ol class="steps"><li data-step="1"><i>1</i><span data-i18n="co_s1"></span></li><li data-step="2"><i>2</i><span data-i18n="co_s2"></span></li><li data-step="3"><i>3</i><span data-i18n="co_s3"></span></li></ol>
+      <button class="x" id="cox" data-i18n-label="close">×</button>
+    </div>
+    <div class="cobody" id="cobody">
+      <div>
+        <section class="copane" data-pane="1">
+          <h3 data-i18n="co_ship_h"></h3>
+          <p class="conote" data-i18n="co_ship_note"></p>
+          <div class="cogrid">
+            <label><span data-i18n="co_name"></span><input id="fname" autocomplete="off" maxlength="60"></label>
+            <label><span data-i18n="co_phone"></span><input id="fphone" inputmode="tel" autocomplete="off" maxlength="16"></label>
+            <label class="full"><span data-i18n="co_addr"></span><textarea id="faddr" rows="2" maxlength="200"></textarea></label>
+          </div>
+          <button class="linkbtn" id="cofill" data-i18n="co_fill"></button>
+          <div class="coerr" id="coerr1" role="alert"></div>
+          <div class="coact"><button class="btn primary" id="conext" data-i18n="co_next"></button></div>
+        </section>
+        <section class="copane" data-pane="2" hidden>
+          <h3 data-i18n="co_pay_h"></h3>
+          <p class="conote" data-i18n="co_pay_note"></p>
+          <div class="pms" role="radiogroup" data-i18n-label="co_pay_h">
+            <button class="pm" data-pm="qris" role="radio" aria-checked="false"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#3A1B0B" stroke-width="2.4" stroke-linecap="round"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2M20 14v2M14 18v2h6"/></svg></span><b>QRIS</b><small data-i18n="pm_qris"></small></button>
+            <button class="pm" data-pm="va" role="radio" aria-checked="false"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#3A1B0B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-5 9 5M5 9v9M10 9v9M14 9v9M19 9v9M3 20h18"/></svg></span><b data-i18n="pm_va_h"></b><small data-i18n="pm_va"></small></button>
+            <button class="pm" data-pm="wallet" role="radio" aria-checked="false"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#3A1B0B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4zM4 7V5h12v2M16 13h4"/></svg></span><b data-i18n="pm_wallet_h"></b><small data-i18n="pm_wallet"></small></button>
+            <button class="pm" data-pm="cod" role="radio" aria-checked="false"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#3A1B0B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7M7 19a2 2 0 1 0 0-.1M17 19a2 2 0 1 0 0-.1"/></svg></span><b data-i18n="pm_cod_h"></b><small data-i18n="pm_cod"></small></button>
+          </div>
+          <div class="pmd" id="pmd" hidden></div>
+          <div class="coerr" id="coerr2" role="alert"></div>
+          <div class="coact"><button class="btn ghost" id="coback" data-i18n="co_back"></button><button class="btn primary" id="copay"></button></div>
+        </section>
+        <section class="copane paying" data-pane="paying" hidden><svg class="comb" viewBox="-75 -75 150 150" aria-hidden="true"><polygon class="cell" style="animation-delay:0.00s" points="20.8,12.0 0.0,24.0 -20.8,12.0 -20.8,-12.0 0.0,-24.0 20.8,-12.0"/><polygon class="cell" style="animation-delay:0.18s" points="20.8,-38.0 0.0,-26.0 -20.8,-38.0 -20.8,-62.0 0.0,-74.0 20.8,-62.0"/><polygon class="cell" style="animation-delay:0.36s" points="64.1,-13.0 43.3,-1.0 22.5,-13.0 22.5,-37.0 43.3,-49.0 64.1,-37.0"/><polygon class="cell" style="animation-delay:0.54s" points="64.1,37.0 43.3,49.0 22.5,37.0 22.5,13.0 43.3,1.0 64.1,13.0"/><polygon class="cell" style="animation-delay:0.72s" points="20.8,62.0 0.0,74.0 -20.8,62.0 -20.8,38.0 0.0,26.0 20.8,38.0"/><polygon class="cell" style="animation-delay:0.90s" points="-22.5,37.0 -43.3,49.0 -64.1,37.0 -64.1,13.0 -43.3,1.0 -22.5,13.0"/><polygon class="cell" style="animation-delay:1.08s" points="-22.5,-13.0 -43.3,-1.0 -64.1,-13.0 -64.1,-37.0 -43.3,-49.0 -22.5,-37.0"/></svg><p data-i18n="co_paying"></p><span class="conote" data-i18n="co_paying_sub"></span></section>
+      </div>
+      <aside class="cosum" id="cosum"></aside>
+    </div>
+    <section class="ty" id="ty" hidden>
+      <div class="sky" id="sky">
+      <svg class="flybee" viewBox="-135 -180 320 400" aria-hidden="true">
+        <g class="parcel"><path d="M10,62V150" stroke="#3A1B0B" stroke-width="5"/><g transform="translate(10 186)"><polygon points="34.6,20.0 0.0,40.0 -34.6,20.0 -34.6,-20.0 -0.0,-40.0 34.6,-20.0" fill="#FFC233" stroke="#3A1B0B" stroke-width="6" stroke-linejoin="round"/><path d="M0,-40V40M-34.6,0H34.6" stroke="#3A1B0B" stroke-width="6"/><path d="M0,-40C-16,-62 -30,-48 0,-40C30,-48 16,-62 0,-40" fill="#FF8A1F" stroke="#3A1B0B" stroke-width="5" stroke-linejoin="round"/></g></g>
+        <g transform="rotate(-16)">
+          <clipPath id="tybody"><path d="M89,-19.05Q100,0 89,19.05L61,67.55Q50,86.6 28,86.6L-28,86.6Q-50,86.6 -61,67.55L-89,19.05Q-100,0 -89,-19.05L-61,-67.55Q-50,-86.6 -28,-86.6L28,-86.6Q50,-86.6 61,-67.55Z"/></clipPath>
+          <path d="M89,-19.05Q100,0 89,19.05L61,67.55Q50,86.6 28,86.6L-28,86.6Q-50,86.6 -61,67.55L-89,19.05Q-100,0 -89,-19.05L-61,-67.55Q-50,-86.6 -28,-86.6L28,-86.6Q50,-86.6 61,-67.55Z" fill="#3A1B0B"/><g clip-path="url(#tybody)"><rect x="-46" y="-110" width="30" height="220" fill="#FFC233"/><rect x="14" y="-110" width="30" height="220" fill="#FFC233"/></g>
+          <circle cx="128" cy="-12" r="40" fill="#3A1B0B" stroke="#FF8A1F" stroke-width="18" paint-order="stroke"/><circle cx="141" cy="-24" r="9" fill="#FFF4DC"/>
+          <g class="wing"><circle cx="-62" cy="-92" r="34" fill="#FFF4DC" stroke="#FF8A1F" stroke-width="18" paint-order="stroke"/><path d="M-81.72,-92.68A19.72,19.72 0 0 1 -62.68,-111.72" fill="none" stroke="#FF8A1F" stroke-width="5.4" stroke-linecap="round"/></g><g class="wing"><circle cx="-6" cy="-112" r="46" fill="#FFF4DC" stroke="#FF8A1F" stroke-width="18" paint-order="stroke"/><path d="M-32.68,-112.92A26.68,26.68 0 0 1 -6.92,-138.68" fill="none" stroke="#FF8A1F" stroke-width="7.4" stroke-linecap="round"/></g>
+        </g>
+      </svg>
+      </div>
+      <h3 class="tyh" id="tyh"></h3>
+      <p data-i18n="ty_p"></p>
+      <div class="tycard" id="tycard"></div>
+      <button class="btn primary" id="tydone" data-i18n="ty_done"></button>
+    </section>
+  </div>
+</div>
 
 <div class="adpop" id="adpop" role="dialog" aria-modal="true" data-i18n-label="ad_aria" hidden>
   <div class="adbox" tabindex="-1">
@@ -479,7 +632,20 @@ const T = {
     slogan: 'Sweetened by bees.', f_shop: 'Shop', f_help: 'Help',
     legal: '© 2026 Fizzle. A school design project — not a real shop.', credit: 'Designed by Naufan Abdurrahman, X-3',
     c_cart: 'Your cart', empty: 'Your cart is empty.', subtotal: 'Subtotal', checkout: 'Checkout', remove: 'Remove',
-    notice: 'This is a design mockup. No payment is taken.', product: 'Fizzle Fruit & Honey Soda',
+    product: 'Fizzle Fruit & Honey Soda',
+    co_aria: 'Checkout', co_title: 'Hive checkout', co_s1: 'Delivery', co_s2: 'Payment', co_s3: 'Done',
+    co_ship_h: 'Where should the bees fly?', co_ship_note: 'Pretend checkout: nothing you type is sent anywhere.',
+    co_name: 'Name', co_phone: 'Phone', co_addr: 'Address', co_fill: 'Fill with an example', co_next: 'Continue to payment',
+    err_name: 'Please write your name.', err_phone: 'Please write a phone number (digits only, at least 9).', err_addr: 'Please write an address.',
+    co_pay_h: 'How do you want to pay?', co_pay_note: 'All payment options are pretend. No money moves.',
+    pm_qris: 'Scan a honeycomb code', pm_va_h: 'Bank transfer', pm_va: 'Bank Madu, Bank Sarang, Bank Lebah', pm_wallet_h: 'E-wallet', pm_wallet: 'BzzPay, MaduPay, DompetLebah', pm_cod_h: 'Cash on delivery', pm_cod: 'Pay the courier bee',
+    qris_t: 'Scan with any app. This code is only a picture: nothing is charged.', va_t: 'Virtual account number (pretend)', copy: 'Copy', copied: 'Copied',
+    wallet_t: 'A pretend notification goes to the phone number you gave.', cod_t: 'Pay the courier bee when your order arrives. Exact change, please!',
+    err_pm: 'Choose a payment option first.', co_back: 'Back', co_pay: 'Pay',
+    co_paying: 'The bees are processing your payment…', co_paying_sub: 'Pretend payment, a moment please.',
+    s_items: 'Your order', s_sub: 'Subtotal', s_ship: 'Delivery', s_free: 'Free, by bee', s_total: 'Total', s_demo: 'Pretend shop: no real order is placed.',
+    ty_h: 'Thank you for shopping!', ty_p: 'Our bees are wrapping your order and flying it to you.', ty_done: 'Shop again',
+    ty_no: 'Order', ty_total: 'Total', ty_eta: 'Arrives', ty_eta_v: '1–2 days (pretend)',
     ad_title: 'Watch our ad', ad_sub: 'Twenty seconds of fruit, honey and fizz.', ad_again: 'Play it as a pop-up ad',
     ad_aria: 'Advertisement', ad_label: 'Ad', ad_from: 'Sponsored · Fizzle', ad_visit: 'Shop now',
     skip_in: 'Skip in {n}', skip: 'Skip ad', sound_on: 'Sound on', sound_off: 'Mute'
@@ -514,7 +680,20 @@ const T = {
     slogan: 'Manisnya dari lebah.', f_shop: 'Belanja', f_help: 'Bantuan',
     legal: '© 2026 Fizzle. Proyek desain sekolah — bukan toko sungguhan.', credit: 'Didesain oleh Naufan Abdurrahman, X-3',
     c_cart: 'Keranjang kamu', empty: 'Keranjangmu masih kosong.', subtotal: 'Subtotal', checkout: 'Lanjut ke pembayaran', remove: 'Hapus',
-    notice: 'Ini mockup desain. Tidak ada pembayaran yang diproses.', product: 'Fizzle Soda Buah & Madu',
+    product: 'Fizzle Soda Buah & Madu',
+    co_aria: 'Pembayaran', co_title: 'Kasir Sarang', co_s1: 'Pengiriman', co_s2: 'Pembayaran', co_s3: 'Selesai',
+    co_ship_h: 'Lebahnya terbang ke mana?', co_ship_note: 'Checkout pura-pura: yang kamu ketik tidak dikirim ke mana pun.',
+    co_name: 'Nama', co_phone: 'Nomor HP', co_addr: 'Alamat', co_fill: 'Isi dengan contoh', co_next: 'Lanjut ke pembayaran',
+    err_name: 'Tulis namamu dulu, ya.', err_phone: 'Tulis nomor HP (angka saja, minimal 9).', err_addr: 'Tulis alamatnya dulu, ya.',
+    co_pay_h: 'Mau bayar pakai apa?', co_pay_note: 'Semua pilihan pembayaran hanya pura-pura. Tidak ada uang yang berpindah.',
+    pm_qris: 'Pindai kode sarang lebah', pm_va_h: 'Transfer bank', pm_va: 'Bank Madu, Bank Sarang, Bank Lebah', pm_wallet_h: 'Dompet digital', pm_wallet: 'BzzPay, MaduPay, DompetLebah', pm_cod_h: 'Bayar di tempat', pm_cod: 'Bayar ke kurir lebah',
+    qris_t: 'Pindai dengan aplikasi apa saja. Kode ini hanya gambar: tidak ada yang ditagih.', va_t: 'Nomor virtual account (pura-pura)', copy: 'Salin', copied: 'Tersalin',
+    wallet_t: 'Notifikasi pura-pura dikirim ke nomor HP yang kamu isi.', cod_t: 'Bayar ke kurir lebah saat pesanan tiba. Siapkan uang pas, ya!',
+    err_pm: 'Pilih cara bayar dulu, ya.', co_back: 'Kembali', co_pay: 'Bayar',
+    co_paying: 'Lebah sedang memproses pembayaranmu…', co_paying_sub: 'Pembayaran pura-pura, tunggu sebentar.',
+    s_items: 'Pesananmu', s_sub: 'Subtotal', s_ship: 'Ongkir', s_free: 'Gratis, diantar lebah', s_total: 'Total', s_demo: 'Toko pura-pura: tidak ada pesanan sungguhan.',
+    ty_h: 'Terima kasih sudah belanja!', ty_p: 'Lebah-lebah kami sedang membungkus pesananmu dan menerbangkannya kepadamu.', ty_done: 'Belanja lagi',
+    ty_no: 'Pesanan', ty_total: 'Total', ty_eta: 'Tiba', ty_eta_v: '1–2 hari (pura-pura)',
     ad_title: 'Tonton iklan kami', ad_sub: 'Dua puluh detik buah, madu, dan gelembung.', ad_again: 'Putar sebagai iklan pop-up',
     ad_aria: 'Iklan', ad_label: 'Iklan', ad_from: 'Bersponsor · Fizzle', ad_visit: 'Belanja sekarang',
     skip_in: 'Lewati dalam {n}', skip: 'Lewati iklan', sound_on: 'Nyalakan suara', sound_off: 'Matikan suara'
@@ -546,6 +725,7 @@ function render() {
   $('#q').textContent = qty;
   drawCart();
   tickAd();
+  if (!co.hidden) drawCo();
 }
 function drawCart() {
   const n = [...cart.values()].reduce((a, b) => a + b, 0);
@@ -568,8 +748,105 @@ function add(open) {
   setTimeout(() => { b.classList.remove('added'); label.textContent = t('add'); }, 1400);
   if (open) openCart();
 }
-const openCart = () => { document.body.classList.add('cart-open'); $('#notice').classList.remove('show'); };
+const openCart = () => document.body.classList.add('cart-open');
 const closeCart = () => document.body.classList.remove('cart-open');
+
+// ---------- the checkout: three steps, all pretend; nothing leaves the page ----------
+const co = $('#co');
+let coStep = 1, pmSel = null, bank = 0, wal = 0, coFrom = null, coBusy = false, bubT = 0;
+const cartTotal = () => [...cart.entries()].reduce((a, [id, q]) => a + PACKS.find(x => x.id === id).price * q, 0);
+const BANKS = ['Bank Madu', 'Bank Sarang', 'Bank Lebah'], WALLETS = ['BzzPay', 'MaduPay', 'DompetLebah'];
+// a honeycomb "QR": a seeded pattern of small hexagons, three corner markers and the bee's colours in the middle
+function qrSvg() {
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const hx = (x, y, r) => [0, 1, 2, 3, 4, 5].map(k => (x + r * Math.cos(k * Math.PI / 3 + Math.PI / 6)).toFixed(1) + ',' + (y + r * Math.sin(k * Math.PI / 3 + Math.PI / 6)).toFixed(1)).join(' ');
+  const corner = (x, y) => `<polygon points="${hx(x, y, 20)}" fill="#3A1B0B"/><polygon points="${hx(x, y, 13)}" fill="#fff"/><polygon points="${hx(x, y, 7)}" fill="#3A1B0B"/>`;
+  let cells = '';
+  for (let r = 0; r < 17; r++) for (let c = 0; c < 15; c++) {
+    const x = 12 + c * 8.7 + (r % 2) * 4.35, y = 12 + r * 7.6;
+    const inCorner = (x < 48 && y < 48) || (x > 102 && y < 48) || (x < 48 && y > 102), mid = Math.hypot(x - 75, y - 75) < 18;
+    if (!inCorner && !mid && rnd() < .5) cells += `<polygon points="${hx(x, y, 4.2)}" fill="#3A1B0B"/>`;
+  }
+  return `<svg class="qr" viewBox="0 0 150 150" role="img" aria-label="QRIS"><rect width="150" height="150" rx="10" fill="#fff"/>${cells}${corner(28, 28)}${corner(122, 28)}${corner(28, 122)}<polygon points="${hx(75, 75, 15)}" fill="#FF8A1F"/><path d="M68,70h14M68,80h14" stroke="#3A1B0B" stroke-width="3"/></svg>`;
+}
+function drawCo() {
+  $$('.steps li').forEach(li => { const n = +li.dataset.step; li.classList.toggle('on', n === Math.min(coStep, 3)); li.classList.toggle('done', n < coStep); });
+  $$('.copane').forEach(p => { p.hidden = String(p.dataset.pane) !== String(coStep === 2.5 ? 'paying' : coStep); });
+  $('#cobody').hidden = coStep === 3; $('#ty').hidden = coStep !== 3;
+  $$('.pm').forEach(b => b.setAttribute('aria-checked', String(b.dataset.pm === pmSel)));
+  const d = $('#pmd');
+  d.hidden = !pmSel;
+  if (pmSel === 'qris') d.innerHTML = `<div class="row">${qrSvg()}<p style="margin:0;max-width:22em">${t('qris_t')}</p></div>`;
+  else if (pmSel === 'va') d.innerHTML = `<div class="chips">${BANKS.map((b, i) => `<button class="chip" data-bank="${i}" aria-pressed="${i === bank}">${b}</button>`).join('')}</div><div style="font-size:13px;opacity:.75">${t('va_t')} · ${BANKS[bank]}</div><div class="row"><span class="va" id="vano">88${bank}0 2026 1234 5678</span><button class="chip" id="vacopy">${t('copy')}</button></div>`;
+  else if (pmSel === 'wallet') d.innerHTML = `<div class="chips">${WALLETS.map((w, i) => `<button class="chip" data-wal="${i}" aria-pressed="${i === wal}">${w}</button>`).join('')}</div><p style="margin:0">${t('wallet_t')}</p>`;
+  else if (pmSel === 'cod') d.innerHTML = `<p style="margin:0">${t('cod_t')}</p>`;
+  $('#copay').textContent = t('co_pay') + ' ' + rp(cartTotal());
+  const rows = [...cart.entries()].map(([id, q]) => { const p = PACKS.find(x => x.id === id); return `<div class="it"><img src="img/front.jpg" alt=""><div><b>${lang === 'en' ? p.en : p.id_}</b><br>${q} × ${rp(p.price)}</div><b>${rp(p.price * q)}</b></div>`; });
+  $('#cosum').innerHTML = `<h4>${t('s_items')}</h4>${rows.join('')}<div class="ln"><span>${t('s_sub')}</span><b>${rp(cartTotal())}</b></div><div class="ln"><span>${t('s_ship')}</span><span class="free">${t('s_free')}</span></div><div class="ln total"><span>${t('s_total')}</span><span>${rp(cartTotal())}</span></div><p class="demo">${t('s_demo')}</p>`;
+}
+function openCo() {
+  if (!cart.size) return;
+  coFrom = document.activeElement; coStep = 1; coBusy = false; $('#coerr1').textContent = $('#coerr2').textContent = '';
+  co.hidden = false; drawCo(); $('.cobox').focus();
+}
+function closeCo() { if (co.hidden || coBusy) return; co.hidden = true; clearInterval(bubT); if (coFrom && coFrom.focus) coFrom.focus(); }
+function checkShip() {
+  const name = $('#fname').value.trim(), phone = $('#fphone').value.replace(/[\s-]/g, ''), addr = $('#faddr').value.trim();
+  const bad = [[!name, '#fname', 'err_name'], [!/^\+?\d{9,15}$/.test(phone), '#fphone', 'err_phone'], [!addr, '#faddr', 'err_addr']];
+  bad.forEach(([b, sel]) => $(sel).classList.toggle('bad', b));
+  const first = bad.find(x => x[0]);
+  $('#coerr1').textContent = first ? t(first[2]) : '';
+  if (first) $(first[1]).focus();
+  return !first;
+}
+function pay() {
+  if (!pmSel) { $('#coerr2').textContent = t('err_pm'); return; }
+  coBusy = true; coStep = 2.5; drawCo();
+  setTimeout(() => { coBusy = false; coStep = 3; thanks(); }, 2400);
+}
+// the thank-you scene: the bee flies in, bubbles stream behind it, honeycomb confetti falls; the order is cleared
+function thanks() {
+  const total = cartTotal(), no = 'FZ-' + String(Date.now()).slice(-6), m = { qris: 'QRIS', va: BANKS[bank], wallet: WALLETS[wal], cod: t('pm_cod_h') }[pmSel];
+  drawCo();
+  $('#tyh').innerHTML = t('ty_h').split(' ').map((w, i) => `<span style="animation-delay:${(1.1 + i * .09).toFixed(2)}s">${w}</span>`).join(' ');
+  $('#tycard').innerHTML = `<div><span>${t('ty_no')}</span><br><b>${no}</b></div><div><span>${t('ty_total')}</span><br><b>${rp(total)} · ${m}</b></div><div><span>${t('ty_eta')}</span><br><b>${t('ty_eta_v')}</b></div>`;
+  const sky = $('#sky'), bee = $('.flybee');
+  $$('.conf, .bub').forEach(e => e.remove());
+  bee.style.animation = 'none'; void bee.offsetWidth; bee.style.animation = '';
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const colors = ['#FFC233', '#FFF4DC', '#3A1B0B', '#FFA341'];
+    for (let i = 0; i < 42; i++) {
+      const c = document.createElement('i'); c.className = 'conf';
+      c.style.cssText = `left:${Math.random() * 100}%;background:${colors[i % 4]};--dx:${(Math.random() * 160 - 80).toFixed(0)}px;--r:${(Math.random() * 720 - 360).toFixed(0)}deg;--t:${(1.8 + Math.random() * 1.6).toFixed(2)}s;--d:${(.9 + Math.random() * .9).toFixed(2)}s`;
+      sky.appendChild(c);
+    }
+    clearInterval(bubT);
+    bubT = setInterval(() => {
+      if (co.hidden) { clearInterval(bubT); return; }
+      const r = bee.getBoundingClientRect(), s0 = sky.getBoundingClientRect(), b = document.createElement('i'), size = 8 + Math.random() * 12;
+      b.className = 'bub';
+      b.style.cssText = `width:${size}px;height:${size}px;left:${(r.left - s0.left + r.width * .18 - size / 2).toFixed(0)}px;top:${(r.top - s0.top + r.height * .55).toFixed(0)}px;--dx:${(-20 - Math.random() * 40).toFixed(0)}px`;
+      b.addEventListener('animationend', () => b.remove());
+      sky.appendChild(b);
+    }, 160);
+  }
+  cart.clear(); drawCart();
+  $('#tydone').focus();
+}
+co.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  e.stopPropagation();
+  if (b.id === 'cox') closeCo();
+  else if (b.id === 'cofill') { $('#fname').value = 'Naufan'; $('#fphone').value = '081234567890'; $('#faddr').value = lang === 'en' ? '12 Honeycomb Street, Jakarta' : 'Jl. Sarang Lebah No. 12, Jakarta'; checkShip(); }
+  else if (b.id === 'conext') { if (checkShip()) { coStep = 2; $('#coerr2').textContent = ''; drawCo(); } }
+  else if (b.id === 'coback') { coStep = 1; drawCo(); }
+  else if (b.dataset.pm) { pmSel = b.dataset.pm; $('#coerr2').textContent = ''; drawCo(); }
+  else if (b.dataset.bank) { bank = +b.dataset.bank; drawCo(); }
+  else if (b.dataset.wal) { wal = +b.dataset.wal; drawCo(); }
+  else if (b.id === 'vacopy') { try { navigator.clipboard.writeText($('#vano').textContent.replace(/\s/g, '')); } catch (err) { /* clipboard blocked */ } b.textContent = t('copied'); }
+  else if (b.id === 'copay') pay();
+  else if (b.id === 'tydone') { coStep = 1; pmSel = null; closeCo(); }
+});
 
 // ---------- the pop-up ad: the film plays muted (browsers block sound until a click); Skip unlocks after 5 seconds ----------
 const AD_SKIP = 5, adPop = $('#adpop'), adVid = $('#advideo');
@@ -618,13 +895,13 @@ document.addEventListener('click', e => {
   else if (el.hasAttribute('data-close-cart')) closeCart();
   else if (el.dataset.cq) { const q = (cart.get(el.dataset.cq) || 0) + +el.dataset.d; q > 0 ? cart.set(el.dataset.cq, q) : cart.delete(el.dataset.cq); drawCart(); }
   else if (el.dataset.rm) { cart.delete(el.dataset.rm); drawCart(); }
-  else if (el.id === 'checkout') $('#notice').classList.add('show');
+  else if (el.id === 'checkout') { closeCart(); openCo(); }
   else if (el.id === 'adskip') { if (adReady()) closeAd(); }
   else if (el.id === 'adsound') { adVid.muted = !adVid.muted; if (adVid.paused) { const p = adVid.play(); if (p) p.catch(() => {}); } tickAd(); }
   else if (el.id === 'adsite') { closeAd(); $('#shop').scrollIntoView(); }
   else if (el.hasAttribute('data-open-ad')) openAd(false);
 });
-document.addEventListener('keydown', e => { if (e.key !== 'Escape') return; if (!adPop.hidden) { if (adReady()) closeAd(); } else closeCart(); });
+document.addEventListener('keydown', e => { if (e.key !== 'Escape') return; if (!co.hidden) closeCo(); else if (!adPop.hidden) { if (adReady()) closeAd(); } else closeCart(); });
 // (for the screenshots: ?lang=id, ?cart=open, ?ad=0 (no pop-up), ?ad=open (the pop-up, still, skippable))
 const qs = new URLSearchParams(location.search);
 if (qs.get('lang') === 'id') lang = 'id';
@@ -634,9 +911,15 @@ if (qs.get('cart') === 'open') {
   $('#drawer').style.transition = $('.scrim').style.transition = 'none';
   pack = PACKS[1]; qty = 1; add(false); pack = PACKS[0]; add(false); render(); openCart();
 }
+// (screenshots: ?co=open, ?co=pay, ?co=done open the checkout at that step with an example order)
+if (qs.get('co')) {
+  cart.set('p6', 1); cart.set('p1', 1); drawCart(); openCo();
+  if (qs.get('co') !== 'open') { $('#cofill').click(); coStep = 2; pmSel = 'qris'; drawCo(); }
+  if (qs.get('co') === 'done') { coStep = 3; thanks(); }
+}
 // the pop-up ad, once a visit, a moment after the page opens
 if (qs.get('ad') === 'open') openAd(true);
-else if (qs.get('ad') !== '0' && qs.get('cart') !== 'open') {
+else if (qs.get('ad') !== '0' && qs.get('cart') !== 'open' && !qs.get('co')) {
   let seen = false;
   try { seen = sessionStorage.getItem('fizzle-ad') === '1'; sessionStorage.setItem('fizzle-ad', '1'); } catch (e) { /* storage blocked: show it */ }
   if (!seen) setTimeout(() => openAd(false), 1500);
