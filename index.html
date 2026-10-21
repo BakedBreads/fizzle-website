@@ -14,13 +14,13 @@
 @font-face { font-family: Poppins; font-weight: 700; src: url(fonts/poppins-latin-700-normal.woff2) format('woff2'); }
 @font-face { font-family: Poppins; font-weight: 800; src: url(fonts/poppins-latin-800-normal.woff2) format('woff2'); }
 :root {
-  --orange: #FF8A1F; --orange-d: #F07812; --navy: #1B1F44; --teal: #17A2AD; --pink: #F2466F; --honey: #FFC233; --green: #3FBF5F;
-  --cream: #FFF4DC; --paper: #FFFBF2; --line: 2px solid var(--navy); --shadow: 5px 5px 0 var(--navy);
+  --orange: #FF8A1F; --orange-d: #F07812; --bee: #3A1B0B; --honey: #FFC233; --green: #3FBF5F;
+  --cream: #FFF4DC; --paper: #FFFBF2; --line: 2px solid var(--bee); --shadow: 5px 5px 0 var(--bee);
   --wrap: 1200px; --gap: 24px; --r: 18px;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; font-family: Poppins, system-ui, sans-serif; color: var(--navy); background: var(--cream); font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+body { margin: 0; font-family: Poppins, system-ui, sans-serif; color: var(--bee); background: var(--cream); font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
 body::before { content: ''; position: fixed; inset: 0; z-index: -1; background: radial-gradient(circle, #F2DDB2 1.6px, transparent 1.8px) 0 0 / 28px 28px; opacity: .55; }
 img { display: block; max-width: 100%; }
 button { font: inherit; color: inherit; cursor: pointer; }
@@ -32,7 +32,7 @@ h2 { font-size: 44px; font-weight: 800; }
 .card { background: #fff; border: var(--line); border-radius: var(--r); box-shadow: var(--shadow); }
 
 /* the notice that this is a mockup */
-.mock { background: var(--navy); color: var(--cream); font-size: 13px; text-align: center; padding: 8px 16px; }
+.mock { background: var(--bee); color: var(--cream); font-size: 13px; text-align: center; padding: 8px 16px; }
 .mock b { color: var(--honey); font-weight: 700; }
 
 /* header */
@@ -41,14 +41,14 @@ header { position: sticky; top: 0; z-index: 20; background: var(--orange); borde
 .bar .logo img { height: 60px; width: auto; }
 nav { display: flex; gap: 26px; margin-left: auto; font-weight: 600; font-size: 15px; }
 nav a { text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent; }
-nav a:hover { border-color: var(--navy); }
+nav a:hover { border-color: var(--bee); }
 .lang { display: flex; border: var(--line); border-radius: 999px; overflow: hidden; background: #fff; }
 .lang button { border: 0; background: none; padding: 6px 12px; font-size: 13px; font-weight: 700; }
-.lang button[aria-pressed="true"] { background: var(--navy); color: var(--cream); }
-.cartbtn { position: relative; display: grid; place-items: center; width: 46px; height: 46px; border: var(--line); border-radius: 14px; background: #fff; box-shadow: 3px 3px 0 var(--navy); transition: transform .15s, box-shadow .15s; }
-.cartbtn:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--navy); }
+.lang button[aria-pressed="true"] { background: var(--bee); color: var(--cream); }
+.cartbtn { position: relative; display: grid; place-items: center; width: 46px; height: 46px; border: var(--line); border-radius: 14px; background: #fff; box-shadow: 3px 3px 0 var(--bee); transition: transform .15s, box-shadow .15s; }
+.cartbtn:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--bee); }
 .cartbtn svg { width: 24px; height: 24px; }
-.count { position: absolute; top: -9px; right: -9px; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 11px; background: var(--pink); color: #fff; font-size: 12px; font-weight: 700; display: grid; place-items: center; border: 2px solid var(--navy); }
+.count { position: absolute; top: -9px; right: -9px; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 11px; background: var(--bee); color: var(--cream); font-size: 12px; font-weight: 700; display: grid; place-items: center; border: 2px solid var(--bee); }
 .count:empty, .count[data-n="0"] { display: none; }
 .count.bump { animation: bump .4s cubic-bezier(.25, 1, .5, 1); }
 @keyframes bump { 0% { transform: scale(1); } 35% { transform: scale(1.25); } 100% { transform: scale(1); } }
@@ -69,29 +69,29 @@ nav a:hover { border-color: var(--navy); }
 .pack { border: var(--line); border-radius: 14px; background: #fff; padding: 10px 16px; text-align: left; line-height: 1.25; min-width: 130px; transition: background .15s, transform .15s; }
 .pack small { display: block; font-weight: 500; opacity: .75; }
 .pack span { font-weight: 700; }
-.pack[aria-pressed="true"] { background: var(--honey); box-shadow: 3px 3px 0 var(--navy); transform: translate(-1px, -1px); }
+.pack[aria-pressed="true"] { background: var(--honey); box-shadow: 3px 3px 0 var(--bee); transform: translate(-1px, -1px); }
 .buyrow { display: flex; gap: 14px; align-items: stretch; flex-wrap: wrap; }
 .qty { display: flex; align-items: center; border: var(--line); border-radius: 14px; background: #fff; overflow: hidden; }
 .qty button { width: 44px; height: 52px; border: 0; background: none; font-size: 22px; font-weight: 600; }
 .qty button:hover { background: var(--cream); }
 .qty output { min-width: 34px; text-align: center; font-weight: 700; font-size: 18px; }
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 56px; padding: 0 26px; border: var(--line); border-radius: 14px; font-weight: 700; font-size: 17px; box-shadow: 4px 4px 0 var(--navy); transition: transform .15s, box-shadow .15s, background .2s; text-decoration: none; }
-.btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--navy); }
-.btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--navy); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 56px; padding: 0 26px; border: var(--line); border-radius: 14px; font-weight: 700; font-size: 17px; box-shadow: 4px 4px 0 var(--bee); transition: transform .15s, box-shadow .15s, background .2s; text-decoration: none; }
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--bee); }
+.btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--bee); }
 .btn.primary { background: var(--orange); }
-.btn.dark { background: var(--navy); color: var(--cream); box-shadow: 4px 4px 0 var(--orange-d); }
+.btn.dark { background: var(--bee); color: var(--cream); box-shadow: 4px 4px 0 var(--orange-d); }
 .btn.added { background: var(--green); }
 .btn svg { width: 20px; height: 20px; }
 .ticks { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 26px; font-weight: 600; font-size: 15px; }
 .ticks span { display: flex; align-items: center; gap: 8px; }
-.ticks i { width: 22px; height: 22px; border-radius: 50%; background: var(--teal); border: 2px solid var(--navy); display: grid; place-items: center; }
-.ticks i::after { content: ''; width: 8px; height: 4px; border: solid #fff; border-width: 0 0 2.5px 2.5px; transform: rotate(-45deg) translate(1px, -1px); }
+.ticks i { width: 22px; height: 22px; border-radius: 50%; background: var(--honey); border: 2px solid var(--bee); display: grid; place-items: center; }
+.ticks i::after { content: ''; width: 8px; height: 4px; border: solid var(--bee); border-width: 0 0 2.5px 2.5px; transform: rotate(-45deg) translate(1px, -1px); }
 .shot { position: relative; }
 .shot .card { overflow: hidden; aspect-ratio: 792 / 1000; }
 .shot .card img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 46%; }
 .shot .beeimg { position: absolute; width: 92px; left: -38px; top: 38px; animation: fly 6s ease-in-out infinite; }
 @keyframes fly { 0%, 100% { transform: translate(0, 0) rotate(0); } 50% { transform: translate(10px, -14px) rotate(4deg); } }
-.tag { position: absolute; right: -18px; bottom: 42px; background: var(--pink); color: #fff; border: var(--line); border-radius: 14px; padding: 10px 16px; font-weight: 700; box-shadow: var(--shadow); transform: rotate(3deg); }
+.tag { position: absolute; right: -18px; bottom: 42px; background: var(--honey); color: var(--bee); border: var(--line); border-radius: 14px; padding: 10px 16px; font-weight: 700; box-shadow: var(--shadow); transform: rotate(3deg); }
 
 /* sections */
 section.block { padding: 72px 0; }
@@ -115,7 +115,7 @@ section.block { padding: 72px 0; }
 .ingr { padding: 22px 24px; margin-top: 18px; font-size: 15px; }
 .ingr b { display: block; margin-bottom: 4px; }
 .nutri { padding: 26px 28px; }
-.nutri h3 { font-size: 22px; font-weight: 800; padding-bottom: 12px; border-bottom: 8px solid var(--navy); margin-bottom: 4px; }
+.nutri h3 { font-size: 22px; font-weight: 800; padding-bottom: 12px; border-bottom: 8px solid var(--bee); margin-bottom: 4px; }
 .nutri table { width: 100%; border-collapse: collapse; font-size: 16px; }
 .nutri td { padding: 11px 0; border-bottom: 1.5px solid #D9D2C3; }
 .nutri td:last-child { text-align: right; font-weight: 700; }
@@ -156,7 +156,7 @@ section.block { padding: 72px 0; }
 .cc a { text-decoration: none; }
 .cc a:hover { text-decoration: underline; }
 
-footer.site { background: var(--navy); color: var(--cream); margin-top: 40px; padding: 56px 0 30px; border-top: var(--line); }
+footer.site { background: var(--bee); color: var(--cream); margin-top: 40px; padding: 56px 0 30px; border-top: var(--line); }
 .foot { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 32px; }
 .foot .brand { background: var(--orange); border-radius: var(--r); padding: 22px 24px; border: 2px solid var(--cream); max-width: 380px; }
 .foot .brand img { height: 84px; width: auto; }
@@ -304,8 +304,8 @@ body.cart-open .drawer { transform: none; }
         <div>
           <div class="feats">
             <div class="card feat"><div class="ic" style="background:var(--honey)"><img src="img/bee.svg" alt="" style="width:46px"></div><div><h3 data-i18n="f1h"></h3><p data-i18n="f1p"></p></div></div>
-            <div class="card feat"><div class="ic" style="background:var(--green)"><svg width="34" viewBox="-14 -60 128 120"><path d="M0,0C16,-44 66,-50 98,-4C68,34 20,36 0,0Z" fill="#fff" stroke="#1B1F44" stroke-width="9" stroke-linejoin="round"/></svg></div><div><h3 data-i18n="f2h"></h3><p data-i18n="f2p"></p></div></div>
-            <div class="card feat"><div class="ic" style="background:var(--teal)"><svg width="36" viewBox="0 0 40 40"><circle cx="13" cy="27" r="8" fill="#fff" stroke="#1B1F44" stroke-width="3"/><circle cx="27" cy="15" r="5.5" fill="#fff" stroke="#1B1F44" stroke-width="3"/><circle cx="31" cy="31" r="3.5" fill="#fff" stroke="#1B1F44" stroke-width="2.5"/></svg></div><div><h3 data-i18n="f3h"></h3><p data-i18n="f3p"></p></div></div>
+            <div class="card feat"><div class="ic" style="background:var(--orange)"><svg width="34" viewBox="-14 -60 128 120"><path d="M0,0C16,-44 66,-50 98,-4C68,34 20,36 0,0Z" fill="#fff" stroke="#3A1B0B" stroke-width="9" stroke-linejoin="round"/></svg></div><div><h3 data-i18n="f2h"></h3><p data-i18n="f2p"></p></div></div>
+            <div class="card feat"><div class="ic" style="background:var(--bee)"><svg width="36" viewBox="0 0 40 40"><circle cx="13" cy="27" r="8" fill="#FFF4DC" stroke="#3A1B0B" stroke-width="3"/><circle cx="27" cy="15" r="5.5" fill="#FFF4DC" stroke="#3A1B0B" stroke-width="3"/><circle cx="31" cy="31" r="3.5" fill="#FFF4DC" stroke="#3A1B0B" stroke-width="2.5"/></svg></div><div><h3 data-i18n="f3h"></h3><p data-i18n="f3p"></p></div></div>
           </div>
           <div class="card ingr"><b data-i18n="ingr_h"></b><span data-i18n="ingr"></span></div>
         </div>
@@ -333,8 +333,8 @@ body.cart-open .drawer { transform: none; }
       </div>
       <div class="reviews">
         <article class="card review"><div class="stars" aria-label="5/5">★★★★★</div><p data-i18n="r1"></p><footer><span class="avatar" style="background:var(--honey)">R</span>Raka</footer></article>
-        <article class="card review"><div class="stars" aria-label="5/5">★★★★★</div><p data-i18n="r2"></p><footer><span class="avatar" style="background:var(--pink);color:#fff">D</span>Dinda</footer></article>
-        <article class="card review"><div class="stars" aria-label="4/5">★★★★<span style="opacity:.3">★</span></div><p data-i18n="r3"></p><footer><span class="avatar" style="background:var(--teal);color:#fff">B</span>Bima</footer></article>
+        <article class="card review"><div class="stars" aria-label="5/5">★★★★★</div><p data-i18n="r2"></p><footer><span class="avatar" style="background:var(--orange)">D</span>Dinda</footer></article>
+        <article class="card review"><div class="stars" aria-label="4/5">★★★★<span style="opacity:.3">★</span></div><p data-i18n="r3"></p><footer><span class="avatar" style="background:var(--cream)">B</span>Bima</footer></article>
       </div>
     </div>
   </section>
@@ -400,7 +400,7 @@ const T = {
     lead: 'Sparkling fruit soda sweetened with real honey. Bright, fizzy, and best served ice cold.',
     per: '/ bottle 330 ml', pack: 'Pack size', qty: 'Quantity', add: 'Add to cart', added: 'Added', buy: 'Buy now',
     t1: 'Real honey', t2: 'Real fruit juice', t3: 'Recyclable glass', tag: 'New · 330 ml', alt_front: 'Fizzle bottle, front view',
-    g_title: 'Take a closer look', g_sub: 'A hexagonal glass bottle, shaped like the jar in our logo.',
+    g_title: 'Take a closer look', g_sub: 'A hexagonal glass bottle, shaped like the honeycomb cell in our logo.',
     g1: 'Angled view', g2: 'Front view', g3: 'Can 330 ml', g4: 'Label detail',
     i_title: "What's inside", i_sub: 'Simple ingredients you can read out loud.',
     f1h: 'Real honey', f1p: 'Sweetened with honey for a rounder, softer taste.',
@@ -432,7 +432,7 @@ const T = {
     lead: 'Soda buah berkarbonasi yang dimaniskan dengan madu asli. Segar, penuh gelembung, dan paling enak diminum dingin.',
     per: '/ botol 330 ml', pack: 'Ukuran paket', qty: 'Jumlah', add: '+ Keranjang', added: 'Ditambahkan', buy: 'Beli sekarang',
     t1: 'Madu asli', t2: 'Jus buah asli', t3: 'Kaca bisa didaur ulang', tag: 'Baru · 330 ml', alt_front: 'Botol Fizzle, tampak depan',
-    g_title: 'Lihat lebih dekat', g_sub: 'Botol kaca segi enam, bentuknya seperti toples di logo kami.',
+    g_title: 'Lihat lebih dekat', g_sub: 'Botol kaca segi enam, bentuknya seperti sel sarang madu di logo kami.',
     g1: 'Tampak samping', g2: 'Tampak depan', g3: 'Kaleng 330 ml', g4: 'Detail label',
     i_title: 'Isi di dalamnya', i_sub: 'Bahan sederhana yang mudah dibaca.',
     f1h: 'Madu asli', f1p: 'Dimaniskan dengan madu, rasanya lebih lembut.',
